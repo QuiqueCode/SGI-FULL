@@ -1,0 +1,7 @@
+{
+  "name": "Sistema Gestor de incidencias",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}

@@ -1,0 +1,78 @@
+
+  .login-page{
+    &__image{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+        >img{
+            height: 300px;
+        }
+    }
+  }
+
+  
+
+  ion-input.custom {
+    --background: #fffcfc;
+    --color: #000000;
+    --placeholder-color: #959494;
+    --placeholder-opacity: 0.8;
+  
+    
+    --padding-bottom: 10px;
+    --padding-end: 10px;
+    --padding-start: 10px;
+    --padding-top: 10px;
+
+
+  }
+  
+  ion-input.custom.ios .input-bottom .helper-text,
+  ion-input.custom.ios .input-bottom .counter,
+  ion-input.custom.md .input-bottom .helper-text,
+  ion-input.custom.md .input-bottom .counter {
+    color: var(--ion-color-secondary);
+  }
+
+
+
+.custom-color {
+  --ion-color-base: #ff6600; /* Cambia el color de fondo */
+  --ion-color-base-rgb: 255, 102, 0; /* Cambia el color de fondo en RGB */
+  --ion-color-contrast: #ffffff; /* Cambia el color del texto */
+  --ion-color-contrast-rgb: 255, 255, 255; /* Cambia el color del texto en RGB */
+}
+
+  .login-page {
+    --background: #1A1C27; /* Cambia el color de fondo del IonContent */
+  }
+
+  .login-page__image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* ajusta la altura según sea necesario */
+    margin-bottom: 100px;
+    margin-top: 50px;
+  }
+  
+  .centered-image {
+    text-align: center;
+  }
+
+  ion-button {
+    --background: #556B2F;
+    --background-hover: #556B2F;
+    --background-activated: #647e37;
+    --background-focused: #556B2F;
+  
+    --color: rgb(255, 255, 255);
+  
+    --border-radius: 25px;
+    --border-color: #000;
+    --border-style: solid;
+    --border-width: 1px;
+  
+
+  }

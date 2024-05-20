@@ -1,0 +1,17 @@
+{
+  "name": "sistema_gestor_de_incidencias",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "cd SGI_BACKEND && npm run dev",
+    "start:frontend": "cd SGI_FRONTEND && ionic serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
