@@ -28,7 +28,7 @@ import "./models/BitcaoraEstado.js"
 async function main() {
     try {
       
-      await sequelize.sync();
+      await sequelize.sync({ force: true });
   
       app.listen(3000);
       console.log("Server is listening");

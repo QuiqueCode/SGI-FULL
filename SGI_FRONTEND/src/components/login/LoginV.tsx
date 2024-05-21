@@ -46,7 +46,7 @@ const Login: React.FC = () => {
         <img src={logo} alt="" style={{ width: '500px', maxWidth: '250px' }} />
       </div>
 
-      <form onSubmit={handleSubmit} style={{ paddingTop: '50px' }}>
+      <form onSubmit={handleSubmit} style={{ paddingTop: '10px' }}>
         <span>Correo</span>
         <IonInput
           class="custom"
@@ -80,37 +80,5 @@ const Login: React.FC = () => {
 export default Login;
 
 
-/**   <IonPage>
-  <IonContent className="ion-padding">
-    <IonGrid className="ion-justify-content-center ion-align-items-center">
-      <IonRow className="ion-align-items-center">
-        <IonCol size="12" className="ion-text-center">
-          <IonImg src={logo} style={{ borderRadius: '50%', border: '2px solid black', }} />
-        </IonCol>
-      </IonRow>
-      <IonRow>
-        <IonCol size="12">
-          <IonItem>
-            <IonLabel position="floating">Email</IonLabel>
-            <IonInput type="email" maxlength={20}></IonInput>
-          </IonItem>
-        </IonCol>
-      </IonRow>
-      <IonRow>
-        <IonCol size="12">
-          <IonItem>
-            <IonLabel position="floating">Contraseña</IonLabel>
-            <IonInput type="password" maxlength={20}></IonInput>
-          </IonItem>
-        </IonCol>
-      </IonRow>
-      <IonRow>
-        <IonCol size="12" className="ion-text-center">
-          <IonButton expand="block">Iniciar Sesión</IonButton>
-        </IonCol>
-      </IonRow>
-    </IonGrid>
-  </IonContent>
-</IonPage> */
 
 

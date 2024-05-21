@@ -12,7 +12,10 @@ export const Prioridad = sequelize.define(
     CT_DESCRIPCION: {
       type: DataTypes.STRING(200),
     },
-  },
+  },    {
+    tableName: "T_PRIORIDAD",
+    timestamps: false
+},
   {
     timestamps: false,
   }

@@ -1,5 +1,6 @@
 import { DataTypes, Sequelize } from "sequelize";
 import { sequelize } from "../database/database.js";
+import { Departamento } from "./Departamento.js";
 
 export const Usuarios = sequelize.define(
     "T_USUARIOS",{
@@ -27,7 +28,11 @@ export const Usuarios = sequelize.define(
             type:DataTypes.STRING(30)
         },
         CN_DEPARTAMENTO:{
-            type:DataTypes.INTEGER
+            type:DataTypes.INTEGER,
+            references:{
+                model:Departamento,
+                key:'CN_CODIGO_DEPARTAMENTO'
+            }
         },
         CB_ESTADO:{
             type:DataTypes.BOOLEAN

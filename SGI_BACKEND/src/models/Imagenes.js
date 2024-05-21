@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/database.js";
+import { Incidencia } from "./Incidencia.js";
 
 export const Imagenes = sequelize.define(
   "T_IMAGENES",
@@ -11,6 +12,10 @@ export const Imagenes = sequelize.define(
     },
     CT_CODIGO_INCIDENCIA_R: {
       type: DataTypes.STRING(11),
+      references:{
+        model:Incidencia,
+        key:'CT_CODIGO_INCIDENCIA'
+      }
     },
     CT_IMAGEN: {
       type: DataTypes.STRING(255),

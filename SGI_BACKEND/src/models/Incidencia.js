@@ -1,5 +1,10 @@
 import { DataTypes, INTEGER } from 'sequelize'
 import {sequelize} from '../database/database.js'
+import { Prioridad } from './Prioridad.js';
+import { Riesgos } from './Riesgos.js';
+import { Afectacion } from './Afectaciones.js';
+import { Estados } from './Estados.js';
+import { Categoria } from './Categoria.js';
 
 export const Incidencia = sequelize.define('T_INCIDENCIA', {
     CT_CODIGO_INCIDENCIA: {
@@ -21,23 +26,43 @@ export const Incidencia = sequelize.define('T_INCIDENCIA', {
     CT_LUGAR_DE_INCIDENCIA: {
       type: DataTypes.STRING(35),
     },
-    CN_ID_ESTADO: {
-      type: DataTypes.BOOLEAN,
+    CN_ID_ESTADOF: {
+      type: DataTypes.INTEGER,
+      references:{
+        model:Estados,
+        key:'CN_ID_ESTADO'
+      }
     },
     CT_JUSTIFICACION_CIERRE: {
       type: DataTypes.STRING(200),
     },
     CN_PRIORIDAD: {
       type: DataTypes.INTEGER,
+      references:{
+        model:Prioridad,
+        key:'CN_ID_PRIORIDAD'
+      }
     },
     CN_RIESGO: {
       type: DataTypes.INTEGER,
+      references:{
+        model:Riesgos,
+        key:'CN_ID_RIESGO'
+      }
     },
     CN_AFECTACION: {
       type: DataTypes.INTEGER,
+      references:{
+        model:Afectacion,
+        key:'CN_ID_AFECTACION'
+      }
     },
     CN_CATEGORIA: {
       type: DataTypes.INTEGER,
+      references:{
+        model:Categoria,
+        key:'CN_ID_CATEGORIA'
+      }
     },
     CD_COSTO: {
       type: DataTypes.DOUBLE,
@@ -48,5 +73,6 @@ export const Incidencia = sequelize.define('T_INCIDENCIA', {
   },{
     timestamps: false,
   });
+
 
 

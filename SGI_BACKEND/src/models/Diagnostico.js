@@ -1,5 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/database.js";
+import { Incidencia } from "./Incidencia.js";
+import { Usuarios } from "./Usuarios.js";
 
 export const Diagnostico = sequelize.define(
     "T_DIAGNOSTICO",{
@@ -10,7 +12,11 @@ export const Diagnostico = sequelize.define(
             primaryKey:true
         },
         CT_ID_INCIDENCIA:{
-            type:DataTypes.STRING(11)
+            type:DataTypes.STRING(11),
+            references:{
+                model:Incidencia,
+                key:'CT_CODIGO_INCIDENCIA'
+            }
         },
         CF_FECHA_HORA_DIAGNOSTICO:{
             type:DataTypes.DATE
@@ -25,7 +31,11 @@ export const Diagnostico = sequelize.define(
             type:DataTypes.STRING(200)
         },
         CT_TECNICO:{
-            type:DataTypes.STRING(12)
+            type:DataTypes.STRING(12),
+            references:{
+                model:Usuarios,
+                key:'CT_CEDULA'
+            }
         }
         
     },{timestamps:true})
