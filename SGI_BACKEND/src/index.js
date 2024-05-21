@@ -11,8 +11,6 @@ import "./models/Estados.js"
 import "./models/Imagenes.js"
 import "./models/Usuarios.js"
 import "./models/Departamento.js"
-import "./models/Asigna.js"
-import "./models/Crea.js"
 import "./models/Diagnostico.js"
 import "./models/Pantallas.js"
 import "./models/BitacoraGeneral.js"
@@ -20,6 +18,8 @@ import "./models/PantallaxRol.js"
 import "./models/Roles.js"
 import "./models/UsuariosXRoles.js"
 import "./models/BitcaoraEstado.js"
+import "./models/Incidencia_diagnostico.js"
+import "./models/Asigna.js"
 
 
 
@@ -28,7 +28,7 @@ import "./models/BitcaoraEstado.js"
 async function main() {
     try {
       
-      await sequelize.sync({ force: true });
+      await sequelize.sync({alter:true});
   
       app.listen(3000);
       console.log("Server is listening");

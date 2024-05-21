@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { IonContent, IonInput, IonButton, IonImg, IonPage, IonGrid, IonRow, IonCol, IonItem, IonLabel, IonInputPasswordToggle, IonLoading } from '@ionic/react';
-import logo from '../../assets/circleLogo.png'
+import logo from '../assets/circleLogo.png'
 import './LoginStyle.css'
 import axios from 'axios';
 import { useIonLoading } from '@ionic/react';
+import { LoginViewModel } from '../viewModels/loginViewModel';
 
 
 const consulta = async (form: object, present: any) => {
@@ -20,25 +21,7 @@ const consulta = async (form: object, present: any) => {
 };
 
 const Login: React.FC = () => {
-  const [present, dismiss] = useIonLoading();
-
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-
-  const handleInputChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await consulta(formData, present);
-  };
+  const {present,formData,handleInputChange,handleSubmit}=LoginViewModel()
 
   return (
     <IonContent className='login-page ion-padding'>

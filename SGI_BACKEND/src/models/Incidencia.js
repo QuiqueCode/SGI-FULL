@@ -1,4 +1,4 @@
-import { DataTypes, INTEGER } from 'sequelize'
+import { DataTypes, INTEGER, Sequelize } from 'sequelize'
 import {sequelize} from '../database/database.js'
 import { Prioridad } from './Prioridad.js';
 import { Riesgos } from './Riesgos.js';
@@ -13,8 +13,12 @@ export const Incidencia = sequelize.define('T_INCIDENCIA', {
     },
     CF_FECHA_HORA_REGISTRO: {
       type: DataTypes.DATE,
+      defaultValue: Sequelize.NOW,
+
     },
-    CT_CEDULA_USUARIO: {
+    CT_CEDULA_USUARIO_CREADOR: {
+      type: DataTypes.STRING(15),
+    },  CT_CEDULA_USUARIO_QUE_ASIGNA: {
       type: DataTypes.STRING(15),
     },
     CT_TITULO_INCIDENCIA: {

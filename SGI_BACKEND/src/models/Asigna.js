@@ -20,9 +20,6 @@ export const UsuarioxIncidenciaAsignacion= sequelize.define(
                 key:'CT_CODIGO_INCIDENCIA'
             }
         },
-        CF_FECHA_ASIGNACION:{
-            type:DataTypes.DATE
-        }
 
     },    {
         tableName: "T_USUARIO_X_INCIDENCIA_ASIGNA",

@@ -1,4 +1,4 @@
-import { DataTypes, INTEGER } from "sequelize";
+import { DataTypes, INTEGER, Sequelize } from "sequelize";
 import { sequelize } from "../database/database.js";
 import { Incidencia } from "./Incidencia.js";
 import { Estados } from "./Estados.js";
@@ -18,7 +18,8 @@ export const BitacoraEstados= sequelize.define(
             }
         },
         CF_FECHA_CAMBIO_ESTADO:{
-            type:DataTypes.DATE
+            type:DataTypes.DATE,
+            defaultValue: Sequelize.NOW,
         },
         CN_ESTADO_ACTUAL:{
             type:DataTypes.INTEGER,
