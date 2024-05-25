@@ -32,14 +32,26 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Login from './views/LoginV';
+import Login from './views/LoginView/LoginV';
+import CIncident from './views/CreateIncident/CIncidentV';
+import CDiagnosis from './views/CreateDiagnosis/CDiagnosis';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-    <Login></Login>
+     {/*
+      <IonRouterOutlet>
+        <Route path="/login" component={Login} exact />
+        <Route path="/Cincident" component={CIncident} exact />
+        <Route path="/diagnostico" component={CDiagnosis} exact />
+        <Redirect exact from="/" to="/login" />
+      </IonRouterOutlet>*/}
+
+      
+      
+
     </IonReactRouter>
   </IonApp>
 );

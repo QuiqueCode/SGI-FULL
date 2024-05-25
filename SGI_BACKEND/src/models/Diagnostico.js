@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Sequelize } from "sequelize";
 import { sequelize } from "../database/database.js";
 import { Incidencia } from "./Incidencia.js";
 import { Usuarios } from "./Usuarios.js";
@@ -19,7 +19,8 @@ export const Diagnostico = sequelize.define(
             }
         },
         CF_FECHA_HORA_DIAGNOSTICO:{
-            type:DataTypes.DATE
+            type:DataTypes.DATE,
+            defaultValue: Sequelize.NOW,
         },
         CT_DIAGNOSTICO:{
             type:DataTypes.STRING(200)
@@ -38,4 +39,4 @@ export const Diagnostico = sequelize.define(
             }
         }
         
-    },{timestamps:true})
+    },{timestamps:false})

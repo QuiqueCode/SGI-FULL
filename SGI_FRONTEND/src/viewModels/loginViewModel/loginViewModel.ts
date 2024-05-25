@@ -1,7 +1,8 @@
 import { useIonLoading } from "@ionic/react";
 import { useState } from "react";
-import { LoginModel } from "../assets/models/login.model";
-import { LoginService } from "../services/LoginService";
+import { LoginModel } from "../../models/loginModel/login.model";
+import { LoginService } from "../../services/LoginService/LoginService";
+import { useHistory } from "react-router";
 
 export function LoginViewModel() {
   const [present, dismiss] = useIonLoading();
@@ -10,6 +11,7 @@ export function LoginViewModel() {
     email: "",
     password: "",
   });
+  const history =useHistory();
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -31,12 +33,16 @@ export function LoginViewModel() {
         message: "Iniciando sesion...",
         duration: 1500,
       });
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      // Redirecciona a la página CIncident
+      history.push('/Cincident');
+  
+      
     } catch (error) {
       //setShowAlert(true);
       console.error("Error logging in:", error);
-    } finally {
-      //setShowLoad(false);
-    }
+    } 
   };
   return {
     present,

@@ -1,0 +1,71 @@
+
+
+
+.container {
+    --background: #1A1C27; 
+  }
+
+  .contentContainer{
+    margin: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Alinea horizontalmente */
+  }
+
+  .bodyContainer{
+    margin: 25px;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: start;
+    align-content: flex-start; /* Alinea horizontalmente */
+  }
+
+  .cameraButton {
+    --background: #4A5568;
+    --background-hover: #4A5568;
+    --background-activated: #434d5d;
+    --background-focused: #4A5568;
+  
+    --color: rgb(255, 255, 255);
+  
+    --border-radius: 10px;
+    --border-color: #000;
+    --border-style: solid;
+    --border-width: 1px;
+  }
+
+  .sendButton{
+    --background: #556B2F;
+    --background-hover: #556B2F;
+    --background-activated: #647e37;
+    --background-focused: #556B2F;
+    width: 100%;
+  
+    --color: rgb(255, 255, 255);
+  
+    --border-radius: 10px;
+    --border-color: #000;
+    --border-style: solid;
+    --border-width: 1px;
+  }
+
+
+  ion-input.custom {
+    --background: #fffcfc;
+    --color: #000000;
+    --placeholder-color: #959494;
+    --placeholder-opacity: 0.8;
+  
+    --border-radius: 8px;
+    --padding-bottom: 5px;
+    --padding-end: 10px;
+    --padding-start: 10px;
+    --padding-top: 5px;
+  }
+
+
+
+  .imagesContainer{
+  margin: 50px;
+  }

@@ -20,8 +20,10 @@ export const login = async (req, res) => {
       } else {
         if (password == user.CT_CONTRASENA) {
           console.log("entre");
+          //RECORDAR TRAER LOS ROLES
+          let payLoad= {idUsuario:user.CT_CEDULA}
 
-          let token = jwt.sign({ user: user }, tokenPass, {
+          let token = jwt.sign(payLoad, tokenPass, {
             expiresIn: "24h", 
           });
           res.json({

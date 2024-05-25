@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { IonContent, IonInput, IonButton, IonImg, IonPage, IonGrid, IonRow, IonCol, IonItem, IonLabel, IonInputPasswordToggle, IonLoading } from '@ionic/react';
-import logo from '../assets/circleLogo.png'
+import logo from '../../assets/circleLogo.png'
 import './LoginStyle.css'
 import axios from 'axios';
 import { useIonLoading } from '@ionic/react';
-import { LoginViewModel } from '../viewModels/loginViewModel';
+import { LoginViewModel } from '../../viewModels/loginViewModel/loginViewModel';
 
 
 const consulta = async (form: object, present: any) => {

@@ -15,4 +15,4 @@ export const Pantalla = sequelize.define(
         CT_DESCRIPCION_PANTALLA:{
             type:DataTypes.STRING(200)
         }
-    },{timestamps:true})
+    },{timestamps:false})

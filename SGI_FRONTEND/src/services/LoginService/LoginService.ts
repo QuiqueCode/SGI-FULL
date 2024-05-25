@@ -1,14 +1,16 @@
 import axios from "axios";
-import { LoginModel } from "../assets/models/login.model";
+import { LoginModel } from "../../models/loginModel/login.model";
 
 
 export class LoginService {
+    
     static async login(user: LoginModel) {
       try {
         const response = await axios.post(
-          "http://localhost:3000/login",
+          "http://localhost:3000/api/login",
           user
         );
+        localStorage.setItem('UserData',response.data.token)
         return response.data;
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {

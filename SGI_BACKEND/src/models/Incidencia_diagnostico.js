@@ -26,4 +26,4 @@ export const IncidenciaXDiagnostico = sequelize.define('T_INCIDENCIA_X_DIAGNOSTI
             key:'CT_CEDULA'
         }
     },
-})
+},{timestamps:false})
