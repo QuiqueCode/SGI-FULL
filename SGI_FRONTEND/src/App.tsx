@@ -36,6 +36,7 @@ import Login from './views/LoginView/LoginV';
 import CIncident from './views/CreateIncident/CIncidentV';
 import CDiagnosis from './views/CreateDiagnosis/CDiagnosis';
 import IncidentList from './views/IncidentList/IncidentList';
+import { RolSelector } from './views/RolSelector/RolSelectorV';
 
 setupIonicReact();
 
@@ -54,7 +55,7 @@ const App: React.FC = () => (
       <IncidentList></IncidentList>
       */} 
   
-  <IncidentList></IncidentList>
+<RolSelector></RolSelector>
 
       
 
