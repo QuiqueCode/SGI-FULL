@@ -6,12 +6,14 @@ import { CreateIncidentService } from '../../services/CreateIncidentService/Inci
 import { useHistory } from 'react-router';
 import { DecodedToken } from '../../models/jwt/jwt.model';
 import { jwtDecode } from 'jwt-decode';
+import { useIonLoading } from '@ionic/react';
 
 
 export function CIncidenciaViewModel(){
   const data = localStorage.getItem('UserData') ?? '';
 const decodedToken = jwtDecode<DecodedToken>(data);
 let valueToken = decodedToken.idUsuario;
+const [present, dismiss] = useIonLoading();
 
     const [formData, setFormData] = useState({
         CT_TITULO_INCIDENCIA:'',
@@ -40,8 +42,8 @@ let valueToken = decodedToken.idUsuario;
             source: CameraSource.Camera,
             quality: 100,
           });
+          
     
-          // Verificar si response.webPath es un string antes de actualizar el estado
           if (response.webPath) {
             setImages((prevImages: string[]) => [...prevImages, response.webPath as string]);
             console.log(images)          }
@@ -56,11 +58,25 @@ let valueToken = decodedToken.idUsuario;
         console.log(formData)
         
         try {
-            const incident: CIncidentModel = formData;
-            await CreateIncidentService.createIncident(incident);
-            
+          const incident = formData;
+          await CreateIncidentService.createIncident(incident);
+      
+          present({
+            message: "Creando incidencia...",
+            duration: 1000,
+          }).then(() => {
+            setTimeout(() => {
+              setFormData((prevState) => ({
+                ...prevState,
+                CT_TITULO_INCIDENCIA: '',
+                CT_DESCRIPCION_INCIDENCIA: '',
+                CT_LUGAR_DE_INCIDENCIA: '',
+              }));
+            }, 1000); // Asegura que esto ocurra después de la duración de la alerta
+          });
         } catch (error) {
-            console.error("Error creando incidencia:", error);
+          console.error("Error creando la incidencia:", error);
+          // Manejo de errores
         }
     }
 

@@ -3,3 +3,18 @@ http://ionicframework.com/docs/theming/ */
 body{
     background-color: #1A1C27;
 }
+
+ion-content {
+    --background: #1A1C27; /* Cambia 'blue' por el color que prefieras */
+  }
+
+  .custom-searchbar {
+    padding-left: 10px;
+    width: 100%;
+    --background: #ffffff; /* Fondo del search bar */
+    --color: #000000; /* Color del texto */
+    --icon-color: #666666; /* Color del icono */
+    --placeholder-color: #888888; /* Color del placeholder */
+    --clear-button-color: #999999; /* Color del botón de limpiar */
+    --cancel-button-color: #aaaaaa; /* Color del botón de cancelar */
+  }

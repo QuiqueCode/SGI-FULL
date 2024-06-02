@@ -35,21 +35,27 @@ import './theme/variables.css';
 import Login from './views/LoginView/LoginV';
 import CIncident from './views/CreateIncident/CIncidentV';
 import CDiagnosis from './views/CreateDiagnosis/CDiagnosis';
+import IncidentList from './views/IncidentList/IncidentList';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-     {/*
+     
+     {/**
+      
       <IonRouterOutlet>
         <Route path="/login" component={Login} exact />
         <Route path="/Cincident" component={CIncident} exact />
         <Route path="/diagnostico" component={CDiagnosis} exact />
         <Redirect exact from="/" to="/login" />
-      </IonRouterOutlet>*/}
+      </IonRouterOutlet>
+      <IncidentList></IncidentList>
+      */} 
+  
+  <IncidentList></IncidentList>
 
-      
       
 
     </IonReactRouter>

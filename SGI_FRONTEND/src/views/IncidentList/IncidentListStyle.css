@@ -1,0 +1,76 @@
+.bodyContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.card {
+  width: 94.5%; /* Asegúrate de que cada IonCard ocupa el 100% del ancho del contenedor padre */
+  background-color: white;
+  color: black;
+}
+  .title{
+    color: #8b8a8a;
+  }
+
+  .inButton{
+    padding-left: 16px;
+    --background: #191970;
+    --background-hover: #1a1a5d;
+    --background-activated: #1f1f5f;
+    --background-focused: #191970;
+    
+    
+  
+    --color: rgb(255, 255, 255);
+  
+    --border-radius: 10px;
+    --border-color: #000;
+    --border-style: solid;
+    --border-width: 1px;
+  }
+.backContainer{
+  margin: 25px;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  justify-content: start;
+  align-content: flex-start;
+}
+.titleContainer{
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reportContainer{
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  margin: 10px;
+  margin-top: 70px;
+}
+
+.reportButton{
+  width: 150px;
+    padding-left: 8px;
+    --background: #4A5568;
+    --background-hover: #4A5568;
+    --background-activated: #4A5568;
+    --background-focused: #4A5568;
+    --color: rgb(255, 255, 255);
+    --border-radius: 10px;
+    --border-color: #000;
+    --border-style: solid;
+    --border-width: 1px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px;
+  margin-top: 16px; /* Espacio superior para separar el botón del contenido */
+}

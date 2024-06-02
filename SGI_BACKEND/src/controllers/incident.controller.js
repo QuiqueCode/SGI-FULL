@@ -40,7 +40,8 @@ export const createIncident= async (req,res)=>{
         CT_TITULO_INCIDENCIA,
         CT_DESCRIPCION_INCIDENCIA,
         CT_LUGAR_DE_INCIDENCIA,
-        CN_ID_ESTADOF,CT_CEDULA_USUARIO_CREADOR};
+        CN_ID_ESTADOF,
+        CT_CEDULA_USUARIO_CREADOR};
         console.log(datos)
 
         await Incidencia.create(datos);
@@ -51,4 +52,17 @@ export const createIncident= async (req,res)=>{
     }
 }
 
+export const getIncident= async (req,res)=>{
+
+  try {
+    const incidencias = await Incidencia.findAll({
+      attributes: ['CT_CODIGO_INCIDENCIA', 'CT_DESCRIPCION_INCIDENCIA'],
+    });
+    res.json(incidencias);
+
+  } catch (error) {
+    console.error('Error al obtener incidencias:', error);
+    res.status(500).json({ error: 'No se pudieron obtener las incidencias' });
+  }
+}
 
