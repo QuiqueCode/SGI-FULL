@@ -78,5 +78,3 @@ export const Incidencia = sequelize.define('T_INCIDENCIA', {
     timestamps: false,
   });
 
-
-

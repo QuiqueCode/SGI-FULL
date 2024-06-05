@@ -1,3 +1,6 @@
+import { sequelize } from "../database/database.js";
+import { UsuarioxIncidenciaAsignacion } from "../models/Asigna.js";
+import { Estados } from "../models/Estados.js";
 import { Incidencia } from "../models/Incidencia.js";
 
 
@@ -66,3 +69,36 @@ export const getIncident= async (req,res)=>{
   }
 }
 
+export const getTechnicianIncident=async(req,res)=>{
+  try {
+
+    const idIncidences=await UsuarioxIncidenciaAsignacion.findAll({
+      attributes:['CT_CODIGO_INCIDENCIA_R'],
+      where:{
+        CT_CEDULA_USUARIO_R:702880922
+
+      }
+    });
+    const incidenceIds = idIncidences.map(incidence => incidence.CT_CODIGO_INCIDENCIA_R);
+
+// Ahora busca las incidencias correspondientes en la tabla Incidencia
+  // Luego, buscamos las incidencias y realizamos la unión con la tabla de estados
+  const incidentsData = await Incidencia.findAll({
+    attributes: [
+      'CT_CODIGO_INCIDENCIA',
+      'CT_DESCRIPCION_INCIDENCIA',
+      [sequelize.literal('(SELECT CT_DESCRIPCION FROM T_ESTADOS WHERE T_ESTADOS.CN_ID_ESTADO = T_INCIDENCIA.CN_ID_ESTADOF)'), 'CT_DESCRIPCION_ESTADO']
+    ],
+    where: {
+      CT_CODIGO_INCIDENCIA: incidenceIds
+    }
+  });
+
+    res.json(incidentsData);
+
+  } catch (error) {
+    console.error('Error al obtener incidencias:', error);
+    res.status(500).json({ error: 'No se pudieron obtener las incidencias del usuario' });
+  }
+
+}

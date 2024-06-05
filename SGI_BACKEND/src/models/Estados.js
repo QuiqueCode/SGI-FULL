@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/database.js";
+import {Incidencia}  from "./Incidencia.js";
 
 export const Estados = sequelize.define(
   "T_ESTADOS",

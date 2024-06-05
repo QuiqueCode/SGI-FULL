@@ -38,6 +38,7 @@ import CDiagnosis from './views/CreateDiagnosis/CDiagnosis';
 import IncidentList from './views/IncidentList/IncidentList';
 import { RolSelector } from './views/RolSelector/RolSelectorV';
 import { IncidentTechnicalV } from './views/IncidentTechnicalV/IncidentTechnicalV';
+import TechnicalIncidentList from './views/TechnicalIncidentListV/TechnicalIncidenListV';
 
 setupIonicReact();
 
@@ -52,10 +53,13 @@ const App: React.FC = () => (
         <Route path="/Cincident" component={CIncident} exact />
         <Route path="/RolSelector" component={RolSelector} exact/>
         <Route path="/diagnostic" component={CDiagnosis} exact />
-        <Route path="/IncidetnTechL" component={IncidentList} exact />
+        <Route path="/incidentSupervisorList" component={IncidentList} exact />
         <Route path="/TechIncidentDetail" component={IncidentTechnicalV} exact />
+        <Route path="/TechIncidentsList" component={TechnicalIncidentList} exact />
+
         <Redirect exact from="/" to="/login" />
       </IonRouterOutlet>
+      
 
 
 

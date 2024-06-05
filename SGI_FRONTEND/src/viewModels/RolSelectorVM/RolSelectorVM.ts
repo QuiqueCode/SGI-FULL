@@ -14,7 +14,7 @@ export const RolSelectorActions=()=>{
         history.push('/Cincident')
     }
     const goToTech=()=>{
-        history.push('/IncidetnTechL')
+        history.push('/TechIncidentsList')
     }
 
     return{

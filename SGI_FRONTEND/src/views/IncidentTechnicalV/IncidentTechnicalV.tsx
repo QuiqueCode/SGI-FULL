@@ -28,7 +28,7 @@ export const IncidentTechnicalV = () => {
           <h1 style={{ color: "#C0C0C0" }}>Incidente: </h1>
         </div>
 
-        <div className="bodyContainer">
+        <div className="bodyContainer7">
           <div className="icon-text">
             <IonIcon icon={calendar} className="icon" />
             <span>Fecha y hora de registro: </span>

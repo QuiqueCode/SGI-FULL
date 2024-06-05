@@ -3,7 +3,7 @@ import "./Diagnosis.css";
 import { CDiagnosisMV } from "../../viewModels/createDiagnosisVM/CDiagnosisMV";
 
 const CDiagnosis: React.FC = () => {
-  const { formData, handleInputChange,handleSubmit,backToRolMenu }= CDiagnosisMV();;
+  const { formData, handleInputChange,handleSubmit,backToRolMenu, drophandleInput }= CDiagnosisMV();
 
   return (
     <>
@@ -50,14 +50,16 @@ const CDiagnosis: React.FC = () => {
                 aria-label="Fruit"
                 placeholder="Select fruit"
                 onIonChange={(e) =>
-                  console.log(`ionChange fired with value: ${e.detail.value}`)
+                  drophandleInput(e.detail.value)
                 }
                 onIonCancel={() => console.log("ionCancel fired")}
                 onIonDismiss={() => console.log("ionDismiss fired")}
                 className="custom-select"
+                value={formData.CB_REQUIERE_COMPRA}
+              
               >
-                <IonSelectOption value="apples">Sí</IonSelectOption>
-                <IonSelectOption value="oranges">No</IonSelectOption>
+                <IonSelectOption value={false}>No</IonSelectOption>
+                <IonSelectOption value={true}>Sí</IonSelectOption>
               </IonSelect>
           </div>
 

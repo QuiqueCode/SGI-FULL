@@ -11,13 +11,7 @@ export const Diagnostico = sequelize.define(
             autoIncrement:true,
             primaryKey:true
         },
-        CT_ID_INCIDENCIA:{
-            type:DataTypes.STRING(11),
-            references:{
-                model:Incidencia,
-                key:'CT_CODIGO_INCIDENCIA'
-            }
-        },
+       
         CF_FECHA_HORA_DIAGNOSTICO:{
             type:DataTypes.DATE,
             defaultValue: Sequelize.NOW,

@@ -11,13 +11,16 @@ export function CDiagnosisMV(){
     const decodedToken = jwtDecode<DecodedToken>(data);
     let valueToken = decodedToken.idUsuario;
     const history=useHistory();
+
     const [formData,setFormData]=useState({
         CT_ID_INCIDENCIA:'2024-000001',
         CN_TIEMPO_SOLUCION_ESTIMADO:0,
         CT_DIAGNOSTICO:'',
         CT_OBSERVACIONES:'',
-        CT_TECNICO:valueToken
-    })
+        CT_TECNICO:valueToken,
+        CB_REQUIERE_COMPRA:false,
+    });
+    
 
     const backToRolMenu=()=>{
         history.push("/TechIncidentDetail")
@@ -33,6 +36,14 @@ export function CDiagnosisMV(){
         console.log(name,value);
         console.log(formData)
       };
+
+      const drophandleInput=(value:any)=>{
+        setFormData((prevState) => ({
+            ...prevState,
+            CB_REQUIERE_COMPRA : value,
+          }));
+          console.log(formData)
+      }
 
       const handleSubmit= async (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
@@ -51,6 +62,7 @@ return{
     formData,
     handleInputChange,
     handleSubmit,
-    backToRolMenu
+    backToRolMenu,
+    drophandleInput
 }
 }

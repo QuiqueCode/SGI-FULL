@@ -28,7 +28,7 @@ import "./models/Asigna.js"
 async function main() {
     try {
       
-      await sequelize.sync();
+      await sequelize.sync({alter:true});
   
       app.listen(3000);
       console.log("Server is listening");
