@@ -31,6 +31,10 @@ export const Diagnostico = sequelize.define(
         CT_OBSERVACIONES:{
             type:DataTypes.STRING(200)
         },
+        CB_REQUIERE_COMPRA:{
+            type:DataTypes.BOOLEAN
+            
+            },
         CT_TECNICO:{
             type:DataTypes.STRING(12),
             references:{
