@@ -1,4 +1,4 @@
-.bodyContainer {
+.bodyContainer2 {
     margin-top: 50px;
     display: flex;
     align-items: center;
@@ -8,7 +8,7 @@
     height: 100vh; /* Hace que el contenedor ocupe toda la altura de la ventana */
 }
 
-  .reportButton{
+  .rolSelector{
     width: 100%;
     height: 100px;
    

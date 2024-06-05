@@ -36,7 +36,7 @@ export function LoginViewModel() {
       await new Promise(resolve => setTimeout(resolve, 1500));
 
       // Redirecciona a la página CIncident
-      history.push('/Cincident');
+      history.push('/RolSelector');
   
       
     } catch (error) {

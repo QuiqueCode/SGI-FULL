@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { IncidentListService } from "../../services/IncidentListService/IncidentListService";
 import { IncidentListModel } from "../../models/incidentListModel/IncidentList.model";
+import { useHistory } from "react-router";
 
 
 
@@ -10,8 +11,20 @@ export const IncidentListMV=()=>{
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const history=useHistory();
+
+  const backToMenu=()=>{
+    history.push("/RolSelector")
+
+  }
+  
+  //Recordar que es el id del incidente.
+  const localeData=(idIncident:any)=>{
+    localStorage.setItem(idIncident,"idIncident")
+  }
+
   return{
-    data,setData,setLoading,setError,loading,error
+    data,setData,setLoading,setError,loading,error, backToMenu
   }
 }
 

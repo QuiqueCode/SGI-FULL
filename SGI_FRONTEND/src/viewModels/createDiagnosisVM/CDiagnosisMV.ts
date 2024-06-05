@@ -3,12 +3,14 @@ import { CreateDiagnosisService } from "../../services/CreateDiagnosisService/CD
 import { CreateDiagnosisModel } from "../../models/createDiagnosisModel/createDiagnosis.model";
 import { DecodedToken } from "../../models/jwt/jwt.model";
 import { jwtDecode } from "jwt-decode";
+import { useHistory } from "react-router";
 
 
 export function CDiagnosisMV(){
     const data = localStorage.getItem('UserData') ?? '';
     const decodedToken = jwtDecode<DecodedToken>(data);
     let valueToken = decodedToken.idUsuario;
+    const history=useHistory();
     const [formData,setFormData]=useState({
         CT_ID_INCIDENCIA:'2024-000001',
         CN_TIEMPO_SOLUCION_ESTIMADO:0,
@@ -16,6 +18,11 @@ export function CDiagnosisMV(){
         CT_OBSERVACIONES:'',
         CT_TECNICO:valueToken
     })
+
+    const backToRolMenu=()=>{
+        history.push("/TechIncidentDetail")
+        console.log(history)
+    }
 
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
@@ -43,6 +50,7 @@ export function CDiagnosisMV(){
 return{
     formData,
     handleInputChange,
-    handleSubmit
+    handleSubmit,
+    backToRolMenu
 }
 }

@@ -1,15 +1,15 @@
-import { IonButton, IonContent, IonInput } from "@ionic/react";
+import { IonButton, IonContent, IonInput, IonSelect, IonSelectOption } from "@ionic/react";
 import "./Diagnosis.css";
 import { CDiagnosisMV } from "../../viewModels/createDiagnosisVM/CDiagnosisMV";
 
 const CDiagnosis: React.FC = () => {
-  const { formData, handleInputChange,handleSubmit }= CDiagnosisMV();;
+  const { formData, handleInputChange,handleSubmit,backToRolMenu }= CDiagnosisMV();;
 
   return (
     <>
       <IonContent className="container">
         <div className="bodyContainer">
-          <p>ATRÁS</p>
+          <p onClick={backToRolMenu} >ATRÁS</p>
         </div>
         <div className="contentContainer">
           <h1 style={{ color: "#C0C0C0" }}>Diagnóstico</h1>
@@ -45,6 +45,20 @@ const CDiagnosis: React.FC = () => {
               required
               style={{ marginBottom: "20px", marginTop: "10px" }}
             />
+            <h6>Requiere compra</h6>
+            <IonSelect
+                aria-label="Fruit"
+                placeholder="Select fruit"
+                onIonChange={(e) =>
+                  console.log(`ionChange fired with value: ${e.detail.value}`)
+                }
+                onIonCancel={() => console.log("ionCancel fired")}
+                onIonDismiss={() => console.log("ionDismiss fired")}
+                className="custom-select"
+              >
+                <IonSelectOption value="apples">Sí</IonSelectOption>
+                <IonSelectOption value="oranges">No</IonSelectOption>
+              </IonSelect>
           </div>
 
           <div className="bodyContainer">

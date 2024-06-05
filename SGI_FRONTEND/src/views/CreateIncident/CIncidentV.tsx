@@ -4,21 +4,21 @@ import { CIncidenciaViewModel } from "../../viewModels/createIncidentModel/CInci
 
 
 const CIncident: React.FC = () => {
-const {formData,handleInputChange, handleSubmit, openCamera,images,cambiar}= CIncidenciaViewModel();
+const {formData,handleInputChange, handleSubmit, openCamera,images,backToRolMenu}= CIncidenciaViewModel();
 
 
 return(
     <>
     <IonContent className="container">
-    <div className="bodyContainer">
-          <p onClick={cambiar}>ATRÁS</p> 
+    <div className="bodyContainer5">
+          <p onClick={backToRolMenu}>ATRÁS</p> 
         </div>
         <div className="contentContainer">
         <h1 style={{color:'#C0C0C0'}}>Registro de incidencia</h1>
         </div>
         
         <form onSubmit={handleSubmit} >
-        <div className="bodyContainer">
+        <div className="bodyContainer5">
         <h6>Título de incidencia</h6>  
               <IonInput
           class="custom"
@@ -54,7 +54,7 @@ return(
         ))}
          </div>
 
-        <div className="bodyContainer">
+        <div className="bodyContainer5">
             <IonButton className="sendButton" type="submit">Registrar incidencia</IonButton>
         </div>
         </form>

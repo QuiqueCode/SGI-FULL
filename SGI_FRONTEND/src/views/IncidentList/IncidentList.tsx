@@ -15,7 +15,7 @@ import { IonSearchbar } from '@ionic/react';
 import { IncidentListMV, getIncidentDataList } from "../../viewModels/incidentListVM/incidentListMV";
 
 const IncidentList: React.FC = () => {
-const { data,setData,setLoading,setError,loading,error}=IncidentListMV();
+const { data,setData,setLoading,setError,loading,error, backToMenu}=IncidentListMV();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +45,7 @@ const { data,setData,setLoading,setError,loading,error}=IncidentListMV();
   return (
     <IonContent fullscreen>
            <div className="backContainer">
-          <p>ATRÁS</p> 
+          <p onClick={backToMenu}>ATRÁS</p> 
         </div>
         <div className="titleContainer">
         <h1 style={{color:'#C0C0C0'}}>Lista de incidencia</h1>

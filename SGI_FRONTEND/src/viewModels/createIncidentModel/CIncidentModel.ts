@@ -80,8 +80,8 @@ const [present, dismiss] = useIonLoading();
         }
     }
 
-    const cambiar=()=>{
-        history.push('/login');
+    const backToRolMenu=()=>{
+        history.push('/RolSelector');
     }
     
 return{
@@ -92,6 +92,6 @@ return{
     openCamera,
     setImages,
     images,
-    cambiar
+    backToRolMenu
 }
 }
