@@ -31,3 +31,27 @@ export const createDiagnosis = async (req, res) => {
 
 
 };
+
+
+export const getDiagnosis=async(req,res)=>{
+    try {
+        const {CT_CODIGO_INCIDENCIA_R}=req.query
+        const diagnosisData=await IncidenciaXDiagnostico.findAll({
+            where:{
+                CT_CODIGO_INCIDENCIA_R
+            }
+        })
+        const diagnosisId = diagnosisData.map(
+            (diagnosis) => diagnosis.CN_ID_DIAGNOSTICO_R
+          );
+        const allDiagnosis= await Diagnostico.findAll({
+            where:{
+                CN_ID_DIAGNOSTICO:diagnosisId
+            }
+        })
+        
+        return res.json(allDiagnosis);
+    } catch (error) {
+        return res.status(500).json({messge:"Error en la consulta"})
+    }
+}

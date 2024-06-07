@@ -3,7 +3,7 @@ import { IncidentListModel } from "../../models/incidentListModel/IncidentList.m
 export class IncidentListService {
     static async fetchIncidents(): Promise<IncidentListModel[]> {
         try {
-            const response = await fetch('http://localhost:3000/api/gTechIncidents');
+            const response = await fetch('http://localhost:3000/api/gIncident');
             const data: IncidentListModel[] = await response.json();
             return data;
         } catch (error) {

@@ -6,3 +6,4 @@ export interface CreateDiagnosisModel{
     CT_TECNICO:string,
     CB_REQUIERE_COMPRA:boolean
 }
+

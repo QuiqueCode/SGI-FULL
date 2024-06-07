@@ -8,7 +8,7 @@ const CDiagnosis: React.FC = () => {
   return (
     <>
       <IonContent className="container">
-        <div className="bodyContainer">
+        <div className="bodyContainer8">
           <p onClick={backToRolMenu} >ATRÁS</p>
         </div>
         <div className="contentContainer">
@@ -16,7 +16,7 @@ const CDiagnosis: React.FC = () => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="bodyContainer">
+          <div className="bodyContainer8">
             <h6>Diagnóstico</h6>
             <IonInput
               class="custom"
@@ -63,7 +63,7 @@ const CDiagnosis: React.FC = () => {
               </IonSelect>
           </div>
 
-          <div className="bodyContainer">
+          <div className="bodyContainer8">
             <IonButton className="sendButton" type="submit">
               Registrar diagnostico
             </IonButton>

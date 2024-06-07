@@ -16,10 +16,14 @@ export const RolSelectorActions=()=>{
     const goToTech=()=>{
         history.push('/TechIncidentsList')
     }
+    const goToManager=()=>{
+        history.push('/incidentSupervisorList')
+    }
 
     return{
         backToLogin,
         goToUser,
-        goToTech
+        goToTech,
+        goToManager
     }
 }

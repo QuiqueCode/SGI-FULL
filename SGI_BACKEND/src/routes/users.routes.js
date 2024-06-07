@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { login } from "../controllers/user.controller.js";
-import { createIncident, getIncident, getTechnicianIncident } from "../controllers/incident.controller.js";
-import { createDiagnosis } from "../controllers/diagnostico.controller.js";
+import { createIncident, getIncident, getIncidentData, getTechnicianIncident } from "../controllers/incident.controller.js";
+import { createDiagnosis, getDiagnosis } from "../controllers/diagnostico.controller.js";
 
 
 
@@ -14,8 +14,11 @@ router.post('/login',login);
 router.post('/cIncident',createIncident);
 router.get('/gIncident',getIncident);
 router.get("/gTechIncidents",getTechnicianIncident);
+router.get("/gIncidentInfo",getIncidentData);
 
 //Diagnosis
 router.post('/cDiagnosis',createDiagnosis);
+router.get('/gDiagnosisLi',getDiagnosis);
+
 
 export default router

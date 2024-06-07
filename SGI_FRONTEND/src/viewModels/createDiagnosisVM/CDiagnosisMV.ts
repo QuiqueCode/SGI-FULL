@@ -13,7 +13,7 @@ export function CDiagnosisMV(){
     const history=useHistory();
 
     const [formData,setFormData]=useState({
-        CT_ID_INCIDENCIA:'2024-000001',
+        CT_ID_INCIDENCIA:localStorage.getItem('idIncident')||'',
         CN_TIEMPO_SOLUCION_ESTIMADO:0,
         CT_DIAGNOSTICO:'',
         CT_OBSERVACIONES:'',

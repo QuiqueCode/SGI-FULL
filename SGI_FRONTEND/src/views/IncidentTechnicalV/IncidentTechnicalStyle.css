@@ -55,6 +55,9 @@
     background-color: white;
   }
   .cardtitle{
+    font-size: 20px; /* Cambia este valor según lo que necesites, por ejemplo 1rem, 1.5rem, etc. */
+    font-weight: 500;
+    margin-bottom: 15px;
     color: black;
   }
 

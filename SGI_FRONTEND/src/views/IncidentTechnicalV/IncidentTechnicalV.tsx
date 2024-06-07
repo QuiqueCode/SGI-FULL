@@ -1,5 +1,6 @@
 import {
   briefcase,
+  build,
   calendar,
   cog,
   navigate,
@@ -13,11 +14,17 @@ import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle }
 import "./IncidentTechnicalStyle.css";
 import { IonContent, IonIcon } from "@ionic/react";
 import { IncidentTechnicalVM } from "../../viewModels/incidentTechnicalVM/IncidentTechnicalVM";
+import { useEffect } from "react";
 
 export const IncidentTechnicalV = () => {
 
-  const {moveToDiagnostic,moveToList}=IncidentTechnicalVM();
+  const {moveToDiagnostic,moveToList,setDetails, data,formatDateTime,sendDiagnosis,diagnosisData }=IncidentTechnicalVM();
 
+  
+  useEffect(()=>{
+    setDetails();
+    sendDiagnosis();
+  },[])
   return (
     <>
       <IonContent fullscreen>
@@ -25,13 +32,17 @@ export const IncidentTechnicalV = () => {
           <p onClick={moveToList}>ATRÁS</p>
         </div>
         <div className="titleContainer">
-          <h1 style={{ color: "#C0C0C0" }}>Incidente: </h1>
+          <h1 style={{ color: "#C0C0C0" }}>{"Incidencia: "+ data?.CT_CODIGO_INCIDENCIA}</h1>
         </div>
 
         <div className="bodyContainer7">
+        <div className="icon-text">
+            <IonIcon icon={build} className="icon" />
+            <span>{"Titulo de la incidencia: "+data?.CT_TITULO_INCIDENCIA}</span>
+          </div>
           <div className="icon-text">
             <IonIcon icon={calendar} className="icon" />
-            <span>Fecha y hora de registro: </span>
+            <span>{"Fecha y hora de registro: "+formatDateTime(data?.CF_FECHA_HORA_REGISTRO||'')}</span>
           </div>
           <div className="icon-text">
             <IonIcon icon={person} className="icon" />
@@ -44,7 +55,7 @@ export const IncidentTechnicalV = () => {
             <div>
               <IonSelect
                 aria-label="Fruit"
-                placeholder="Select fruit"
+                placeholder="Seleccionar estado"
                 onIonChange={(e) =>
                   console.log(`ionChange fired with value: ${e.detail.value}`)
                 }
@@ -60,23 +71,19 @@ export const IncidentTechnicalV = () => {
           </div>
           <div className="icon-text">
             <IonIcon icon={shield} className="icon" />
-            <span>Riesgo:</span>
+            <span>{"Riesgo: "+ data?.CT_DESCRIPCION_RIESGO}</span>
           </div>
           <div className="icon-text">
             <IonIcon icon={shield} className="icon" />
-            <span>Afectación: </span>
+            <span>{"Afectación: "+data?.CT_DESCRIPCION_AFECTACION} </span>
           </div>
           <div className="icon-text">
             <IonIcon icon={navigate} className="icon" />
-            <span>Lugar de afectación: </span>
+            <span>{"Lugar de afectación: "+data?.CT_LUGAR_DE_INCIDENCIA }</span>
           </div>
           <div className="icon-text">
             <IonIcon icon={cog} className="icon" />
-            <span>Categoría: </span>
-          </div>
-          <div className="icon-text">
-            <IonIcon icon={briefcase} className="icon" />
-            <span>Técnicos asignados: </span>
+            <span>{"Categoría: "+data?.CT_DESCRIPCION_CATEGORIA} </span>
           </div>
         </div>
 
@@ -89,7 +96,7 @@ export const IncidentTechnicalV = () => {
 
       </IonCardHeader>
 
-      <IonCardContent>Here's a small text description for the card content. Nothing more, nothing less.</IonCardContent>
+      <IonCardContent>{data?.CT_DESCRIPCION_INCIDENCIA}</IonCardContent>
     </IonCard>
         </div>
         
@@ -102,6 +109,32 @@ export const IncidentTechnicalV = () => {
       <IonCardContent>Imagenes</IonCardContent>
     </IonCard>
         </div>
+        {diagnosisData.map((data,index)=>(
+   <div className="cardContainer">
+   <IonCard className="cardInfo" >
+ <IonCardHeader>
+ <IonCardSubtitle color={"tertiary"}>
+  {"Tiempo estimado: "+data.CN_TIEMPO_SOLUCION_ESTIMADO+"h"}
+ </IonCardSubtitle>
+ <IonCardSubtitle color={"tertiary"}>
+  {"Requiere compra: "+(data.CT_DIAGNOSTICO?"Sí":"No")}
+ </IonCardSubtitle>
+ <IonCardSubtitle color={"tertiary"}>
+  {"Diagnostico: "+data.CT_DIAGNOSTICO}
+ </IonCardSubtitle>
+ <IonCardSubtitle color={"tertiary"}>
+  {"Observaciones: "+data.CT_OBSERVACIONES}
+ </IonCardSubtitle>
+   <IonCardTitle class="cardtitle">{"Fecha: "+formatDateTime(data.CF_FECHA_HORA_DIAGNOSTICO)}</IonCardTitle>
+
+ </IonCardHeader>
+  
+</IonCard>
+   </div>
+
+        )
+
+        )}
         <div className="buttonContainer">
           <IonButton className="button2">Agregar Imagenes</IonButton>
           <IonButton className="button2" onClick={moveToDiagnostic}>Agregar Diagnostico</IonButton>
