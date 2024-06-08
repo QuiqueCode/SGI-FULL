@@ -9,7 +9,9 @@ ion-content {
   }
 
   .custom-searchbar {
-    padding-left: 10px;
+    margin: 0px;
+    padding: 0px;
+  
     width: 100%;
     --background: #ffffff; /* Fondo del search bar */
     --color: #000000; /* Color del texto */
@@ -17,4 +19,13 @@ ion-content {
     --placeholder-color: #888888; /* Color del placeholder */
     --clear-button-color: #999999; /* Color del botón de limpiar */
     --cancel-button-color: #aaaaaa; /* Color del botón de cancelar */
+  }
+  p{
+    color: white;
+  }
+  h1,h6{
+    color: white;
+  }
+  span{
+    color: white;
   }

@@ -9,10 +9,18 @@ import {
   IonCardSubtitle,
   IonCardTitle,
   IonContent,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonNote,
+  IonText,
+  IonThumbnail,
+  IonList,
 } from "@ionic/react";
 import "./IncidentListStyle.css";
 import { IonSearchbar } from '@ionic/react';
 import { IncidentListMV, getIncidentDataList } from "../../viewModels/incidentListVM/incidentListMV";
+import { chevronForward } from "ionicons/icons";
 
 const IncidentList: React.FC = () => {
 const { data,setData,setLoading,setError,loading,error, backToMenu}=IncidentListMV();
@@ -57,24 +65,31 @@ const { data,setData,setLoading,setError,loading,error, backToMenu}=IncidentList
       <div className="bodyContainer">
 
       <IonSearchbar className="custom-searchbar" placeholder="2024-00001"></IonSearchbar> <br />
+      
+      </div>
         {data.map((incident) => (
+           <IonList inset={true}>
+           <IonItem  detail={false}>
+             <div className="unread-indicator-wrapper" slot="start">
+               <div className="unread-indicator"></div>
+             </div>
+             <IonLabel>
+             {"Incidencia: " + incident.CT_CODIGO_INCIDENCIA}
+             <br />
+
+               <IonNote color="medium" className="ion-text-wrap">
+               {"Descripción: "+incident.CT_DESCRIPCION_INCIDENCIA}
+               </IonNote>
+             </IonLabel>
          
-            <IonCard key={incident.CT_CODIGO_INCIDENCIA} className="card">
-              <IonCardHeader>
-                <IonCardTitle className="title">
-                  {"Incidencia: " + incident.CT_CODIGO_INCIDENCIA}
-                </IonCardTitle>
-              </IonCardHeader>
-              <IonCardContent>
-                {incident.CT_DESCRIPCION_INCIDENCIA}
-              </IonCardContent>
-              <div className="button-container">
-            <IonButton className="inButton">Ingresar</IonButton>
-          </div>
-            </IonCard>
+             <IonButton
+             slot="end"> Hola</IonButton>
+           </IonItem>
+          
+         </IonList>
          
         ))}
-      </div>
+      
     </IonContent>
   );
 };

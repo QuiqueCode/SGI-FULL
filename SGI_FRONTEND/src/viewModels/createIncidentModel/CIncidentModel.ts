@@ -6,10 +6,12 @@ import { CreateIncidentService } from '../../services/CreateIncidentService/Inci
 import { useHistory } from 'react-router';
 import { DecodedToken } from '../../models/jwt/jwt.model';
 import { jwtDecode } from 'jwt-decode';
-import { useIonLoading } from '@ionic/react';
+import { useIonLoading, useIonToast } from '@ionic/react';
 
 
 export function CIncidenciaViewModel(){
+
+  const [presentT] = useIonToast();
   const data = localStorage.getItem('UserData') ?? '';
 const decodedToken = jwtDecode<DecodedToken>(data);
 let valueToken = decodedToken.idUsuario;
@@ -42,30 +44,76 @@ const [present, dismiss] = useIonLoading();
             source: CameraSource.Camera,
             quality: 100,
           });
-          
     
           if (response.webPath) {
-            setImages((prevImages: string[]) => [...prevImages, response.webPath as string]);
-            console.log(images)          }
+            setImages((prevImages) => [...prevImages, response.webPath as string]);
+            console.log(images);
+           // uploadImage(response.webPath);
+          }
         } catch (error) {
           console.error('Error taking photo', error);
         }
       };
 
+    
+      const uploadImage = async () => {
+        try {
+          for (const imageUri of images) {
+            const response = await fetch(imageUri);
+            const blob = await response.blob();
+    
+            const formData = new FormData();
+            formData.append('file', blob, 'image.jpg'); // El nombre del campo debe ser 'file'
+    
+            const serverResponse = await CreateIncidentService.sendImages(formData);
+            console.log('Imagen subida con éxito:', serverResponse.data);
+          }
+          
+        } catch (error) {
+          console.error('Error al subir las imágenes:', error);
+        }
+      }
+
+      const presentToast = () => {
+        presentT({
+          message: 'Incidencia Almacenada!',
+          duration: 3000,
+          position: "top",
+          color:"success"
+        });
+      };
+
+      
+      const presentToast2 = () => {
+        presentT({
+          message: 'No has añadido imagenes!',
+          duration: 3000,
+          position: "top",
+          color:"danger"
+        });
+      };
+    
+    
 
     const handleSubmit= async (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         console.log(formData)
-        
+        if (images.length!=0) {
+          
+      
         try {
           const incident = formData;
           await CreateIncidentService.createIncident(incident);
+          uploadImage();
+          
       
           present({
             message: "Creando incidencia...",
             duration: 1000,
           }).then(() => {
             setTimeout(() => {
+              presentToast();
+              setImages([]);
               setFormData((prevState) => ({
                 ...prevState,
                 CT_TITULO_INCIDENCIA: '',
@@ -78,6 +126,9 @@ const [present, dismiss] = useIonLoading();
           console.error("Error creando la incidencia:", error);
           // Manejo de errores
         }
+      }else{
+        presentToast2();
+      }
     }
 
     const backToRolMenu=()=>{
@@ -92,6 +143,7 @@ return{
     openCamera,
     setImages,
     images,
-    backToRolMenu
+    backToRolMenu,
+  
 }
 }

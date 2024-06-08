@@ -4,10 +4,11 @@ import { UsuarioxIncidenciaAsignacion } from "../models/Asigna.js";
 import { Estados } from "../models/Estados.js";
 import { Incidencia } from "../models/Incidencia.js";
 import { Usuarios } from "../models/Usuarios.js";
+import { Imagenes } from "../models/Imagenes.js";
 
 
 
-
+let CT_CODIGO_INCIDENCIA_R;
 //USUARIO
 
 async function generateUniqueCode() {
@@ -28,7 +29,7 @@ async function generateUniqueCode() {
     const nuevoNumero = (ultimoNumero + 1).toString().padStart(6, "0");
     nuevoCodigo = `${prefijo}${nuevoNumero}`;
   }
-
+CT_CODIGO_INCIDENCIA_R=nuevoCodigo
   return nuevoCodigo;
 }
 
@@ -63,6 +64,22 @@ export const createIncident = async (req, res) => {
   }
 };
 
+//Enviar imagenes
+
+export const sendFirstImages = async (req, res) => {
+
+  try {
+    const CT_IMAGEN = `/images/${req.file.filename}`
+    const sendImages=await Imagenes.create({
+      CT_CODIGO_INCIDENCIA_R,CB_TIPO:0,CT_IMAGEN
+    })
+    return res.json(sendImages);
+  } catch (error) {
+    return InternalError(res, error);
+  }
+}
+
+
 export const getIncident = async (req, res) => {
   try {
     const incidencias = await Incidencia.findAll({
@@ -75,6 +92,25 @@ export const getIncident = async (req, res) => {
   }
 };
 
+//GetImages
+export const getImages=async(req,res)=>{
+try {
+  const {CT_CODIGO_INCIDENCIA_R}=req.query;
+  const images= await Imagenes.findAll({
+    attributes:[
+      "CT_ID_IMAGEN",
+      "CT_IMAGEN"
+    ],
+    where:{
+      CT_CODIGO_INCIDENCIA_R
+    }
+  })
+  res.json(images);
+} catch (error) {
+  console.error("Error al obtener Imagenes:", error);
+  res.status(500).json({ error: "No se pudieron obtener las imagenes" });
+}
+}
 
 
 
@@ -201,3 +237,5 @@ export const getIncidentData = async (req, res) => {
     res.status(500).json({ error: "No se pudieron obtener los datos del incidente" });
   }
 };
+
+

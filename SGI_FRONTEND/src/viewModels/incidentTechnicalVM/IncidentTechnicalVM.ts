@@ -5,14 +5,19 @@ import { IncidentTechnicianListModel } from "../../models/incidentTechnicianList
 import { DiagnosisIncidentListService, IncidentTechnicianListService } from "../../services/IncidentTechnicianListService/IncidentTechnicianListS";
 import { IncidentDiagnosisListM, IncidentTechnicianDetailM } from "../../models/IncidenTechnicianDetailModel/IncidentTechnicianDetailM";
 import { IncidentTechnicianDetailService } from "../../services/GetTechnicianDiagnosisDetailService/IncidentTechnicianDetailService";
+import { InitialImagesService } from "../../services/InitialImagesService/InitialImagesService";
+import { InitialImagesModel } from "../../models/initialImages/InitialImages";
 
 export const IncidentTechnicalVM = () => {
   const [data, setData] = useState<IncidentTechnicianDetailM>();
   const [diagnosisData,setDiagnosis]=useState<IncidentDiagnosisListM[]>([]);;
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [imagesData,setImagesData]=useState<InitialImagesModel[]>([]);
   const history = useHistory();
 
+
+  
 
   const moveToDiagnostic = () => {
     history.push("/diagnostic");
@@ -29,6 +34,7 @@ export const IncidentTechnicalVM = () => {
     history.push("/TechIncidentDetail");
     localStorage.setItem('idIncident',id)
   }
+
 
   function formatDateTime(isoString:string) {
     // Crear un objeto Date a partir de la cadena ISO
@@ -61,6 +67,8 @@ export const IncidentTechnicalVM = () => {
     }
   }
 
+  
+
   const sendDiagnosis= async()=>{
     try {
       const diagnosis=await DiagnosisIncidentListService.fetchDiagnosis();
@@ -71,6 +79,10 @@ export const IncidentTechnicalVM = () => {
     }
   }
   
+  const chargeImages=async()=>{
+    const images= await InitialImagesService.fetchImages();
+    setImagesData(images);
+  }
   return {
     moveToDiagnostic,
     moveToList,
@@ -85,7 +97,9 @@ export const IncidentTechnicalVM = () => {
     setDetails,
     formatDateTime,
     sendDiagnosis,
-    diagnosisData
+    diagnosisData, 
+     chargeImages,
+    imagesData
   };
 };
 

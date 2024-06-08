@@ -1,9 +1,9 @@
-import { IonButton, IonContent, IonInput, IonSelect, IonSelectOption } from "@ionic/react";
+import { IonButton, IonContent, IonInput, IonSelect, IonSelectOption, IonToggle } from "@ionic/react";
 import "./Diagnosis.css";
 import { CDiagnosisMV } from "../../viewModels/createDiagnosisVM/CDiagnosisMV";
 
 const CDiagnosis: React.FC = () => {
-  const { formData, handleInputChange,handleSubmit,backToRolMenu, drophandleInput }= CDiagnosisMV();
+  const { formData, handleInputChange,handleSubmit,backToRolMenu, drophandleInput,changeValue }= CDiagnosisMV();
 
   return (
     <>
@@ -45,22 +45,9 @@ const CDiagnosis: React.FC = () => {
               required
               style={{ marginBottom: "20px", marginTop: "10px" }}
             />
-            <h6>Requiere compra</h6>
-            <IonSelect
-                aria-label="Fruit"
-                placeholder="Select fruit"
-                onIonChange={(e) =>
-                  drophandleInput(e.detail.value)
-                }
-                onIonCancel={() => console.log("ionCancel fired")}
-                onIonDismiss={() => console.log("ionDismiss fired")}
-                className="custom-select"
-                value={formData.CB_REQUIERE_COMPRA}
-              
-              >
-                <IonSelectOption value={false}>No</IonSelectOption>
-                <IonSelectOption value={true}>Sí</IonSelectOption>
-              </IonSelect>
+        
+         
+              <IonToggle onIonChange={changeValue} style={{color:"white"}} color={"tertiary"} checked={formData.CB_REQUIERE_COMPRA}>Requiere compra</IonToggle>
           </div>
 
           <div className="bodyContainer8">

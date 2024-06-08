@@ -2,11 +2,14 @@ import { useState } from "react"
 import { IncidentListService } from "../../services/IncidentListService/IncidentListService";
 import { IncidentListModel } from "../../models/incidentListModel/IncidentList.model";
 import { useHistory } from "react-router";
+import { InitialImagesModel } from "../../models/initialImages/InitialImages";
+import { InitialImagesService } from "../../services/InitialImagesService/InitialImagesService";
 
 
 
 
 export const IncidentListMV=()=>{
+  const [imagesData,setImagesData]=useState<InitialImagesModel[]>([]);
   const [data, setData] = useState<IncidentListModel[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -19,9 +22,10 @@ export const IncidentListMV=()=>{
   }
   
   //Recordar que es el id del incidente.
-  const localeData=(idIncident:any)=>{
-    localStorage.setItem(idIncident,"idIncident")
-  }
+
+
+
+
 
   return{
     data,setData,setLoading,setError,loading,error, backToMenu

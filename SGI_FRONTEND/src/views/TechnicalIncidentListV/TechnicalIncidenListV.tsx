@@ -9,6 +9,10 @@ import {
   IonCardSubtitle,
   IonCardTitle,
   IonContent,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonNote,
 } from "@ionic/react";
 import "./TechnicalIncidentListStyle.css";
 import { IonSearchbar } from '@ionic/react';
@@ -54,26 +58,31 @@ const { data,setData,setLoading,setError,loading,error,backToMenu,goToDetail}=In
 
 <div className="bodyContainer">
 
-<IonSearchbar className="custom-searchbar" placeholder="2024-00001"></IonSearchbar> <br />
- {data.map((incident) => (
-  
-     <IonCard key={incident.CT_CODIGO_INCIDENCIA} className="card">
-       <IonCardHeader>
-         <IonCardTitle className="title">
-           {"Incidencia: " + incident.CT_CODIGO_INCIDENCIA}
-         </IonCardTitle>
-         <IonCardSubtitle style={{color:'black'}}>
+<IonSearchbar className="custom-searchbar" style={{width:"100%"}} placeholder="2024-00001"></IonSearchbar> <br />
+ {data.map((incident,index) => (
+         <IonList inset={true}  style={{width:"100%",marginBottom:"10px",borderRadius:"8px"}}>
+           <IonItem  detail={false}>
+         
+             <IonLabel>
+             
+         
+             <IonNote color="dark" className="ion-text-wrap">
+             {"Incidencia: " + incident.CT_CODIGO_INCIDENCIA}<br />
+               </IonNote>
+               <IonNote color="medium" className="ion-text-wrap">
+               {"Estado: "+ incident.CT_DESCRIPCION_ESTADO} <br />
+               </IonNote>
+               <IonNote color="medium" className="ion-text-wrap">
+               {incident.CT_DESCRIPCION_INCIDENCIA}
+               </IonNote>
+             </IonLabel>
+         
+             <IonButton
+             slot="end" className="inButton" onClick={()=>{goToDetail(incident.CT_CODIGO_INCIDENCIA)}}> Ingresar</IonButton>
+           </IonItem>
           
-          {"Estado: "+ incident.CT_DESCRIPCION_ESTADO}
-         </IonCardSubtitle>
-       </IonCardHeader>
-       <IonCardContent>
-         {incident.CT_DESCRIPCION_INCIDENCIA}
-       </IonCardContent>
-       <div className="button-container">
-     <IonButton className="inButton" onClick={()=>{goToDetail(incident.CT_CODIGO_INCIDENCIA)}}>Ingresar</IonButton>
-   </div>
-     </IonCard>
+         </IonList>
+   
   
  ))}
 </div>
