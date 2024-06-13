@@ -11,7 +11,7 @@ export const RolSelectorActions=()=>{
         localStorage.clear();
     }
     const goToUser=()=>{
-        history.push('/Cincident')
+        history.push('/UserIncidentL')
     }
     const goToTech=()=>{
         history.push('/TechIncidentsList')

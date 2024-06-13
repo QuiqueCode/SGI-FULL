@@ -68,11 +68,11 @@ const { data,setData,setLoading,setError,loading,error, backToMenu}=IncidentList
       
       </div>
         {data.map((incident) => (
+
+          
            <IonList inset={true}>
            <IonItem  detail={false}>
-             <div className="unread-indicator-wrapper" slot="start">
-               <div className="unread-indicator"></div>
-             </div>
+          
              <IonLabel>
              {"Incidencia: " + incident.CT_CODIGO_INCIDENCIA}
              <br />
@@ -81,12 +81,12 @@ const { data,setData,setLoading,setError,loading,error, backToMenu}=IncidentList
                {"Descripción: "+incident.CT_DESCRIPCION_INCIDENCIA}
                </IonNote>
              </IonLabel>
-         
-             <IonButton
-             slot="end"> Hola</IonButton>
+             <IonButton className="inItem">Ingresar</IonButton>
+        
            </IonItem>
           
          </IonList>
+      
          
         ))}
       

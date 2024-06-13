@@ -71,8 +71,10 @@
   width: 315.33px;
   --background:var(--background-focused)
 }
-.unread-indicator {
-  background: var(--ion-color-primary);
+
+.unread-indicatorL {
+  background: var(--ion-color-success);
+  
 
   width: 10px;
   height: 10px;
@@ -83,4 +85,48 @@
 
   inset-inline-start: 12px;
   top: 12px;
+}
+.unread-indicatorM {
+  background: var(--ion-color-warning);
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 100%;
+
+  position: absolute;
+
+  inset-inline-start: 12px;
+  top: 12px;
+}
+.unread-indicatorH {
+  background: var(--ion-color-danger);
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 100%;
+
+  position: absolute;
+
+  inset-inline-start: 12px;
+  top: 12px;
+}
+.inItem{
+  width: 100px;
+  height: 30px;
+  padding-left: 16px;
+  --background: #191970;
+  --background-hover: #1a1a5d;
+  --background-activated: #1f1f5f;
+  --background-focused: #191970;
+  
+  
+
+  --color: rgb(255, 255, 255);
+
+  --border-radius: 10px;
+  --border-color: #000;
+  --border-style: solid;
+  --border-width: 1px;
 }

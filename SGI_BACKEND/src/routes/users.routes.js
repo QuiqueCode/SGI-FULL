@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { login } from "../controllers/user.controller.js";
-import { createIncident, getImages, getIncident, getIncidentData, getTechnicianIncident, sendFirstImages } from "../controllers/incident.controller.js";
+import { createIncident, getImages, getIncident, getIncidentData, getIncidentUser, getTechnicianIncident, sendFirstImages } from "../controllers/incident.controller.js";
 import { createDiagnosis, getDiagnosis } from "../controllers/diagnostico.controller.js";
 import multer from "multer";
 import { storage } from "./midleware.js";
@@ -16,6 +16,7 @@ router.get('/imagesDetailIncident',getImages );
 
 //User
 router.post('/login',login);
+router.get('/gIncidentU',getIncidentUser);
 
 //Incident
 router.post('/cIncident',createIncident);

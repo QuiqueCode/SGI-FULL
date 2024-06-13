@@ -48,7 +48,7 @@ const [present, dismiss] = useIonLoading();
           if (response.webPath) {
             setImages((prevImages) => [...prevImages, response.webPath as string]);
             console.log(images);
-           // uploadImage(response.webPath);
+     
           }
         } catch (error) {
           console.error('Error taking photo', error);
@@ -63,7 +63,7 @@ const [present, dismiss] = useIonLoading();
             const blob = await response.blob();
     
             const formData = new FormData();
-            formData.append('file', blob, 'image.jpg'); // El nombre del campo debe ser 'file'
+            formData.append('file', blob, 'image.jpg');
     
             const serverResponse = await CreateIncidentService.sendImages(formData);
             console.log('Imagen subida con éxito:', serverResponse.data);
@@ -132,7 +132,7 @@ const [present, dismiss] = useIonLoading();
     }
 
     const backToRolMenu=()=>{
-        history.push('/RolSelector');
+        history.push('/UserIncidentL');
     }
     
 return{

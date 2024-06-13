@@ -9,7 +9,7 @@ import { InitialImagesService } from "../../services/InitialImagesService/Initia
 import { InitialImagesModel } from "../../models/initialImages/InitialImages";
 
 export const IncidentTechnicalVM = () => {
-  const [data, setData] = useState<IncidentTechnicianDetailM>();
+  const [data, setData] = useState<IncidentTechnicianListModel[]>([]);
   const [diagnosisData,setDiagnosis]=useState<IncidentDiagnosisListM[]>([]);;
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -78,6 +78,19 @@ export const IncidentTechnicalVM = () => {
       
     }
   }
+
+  const getData= async()=>{
+    try {
+      const result = await getIncidentTechnicianDataList();
+      setData(result);
+      setError(null); // Reset error if successful
+    } catch (error) {
+      console.error("Error al obtener incidencias:", error);
+      setError("Failed to fetch incidents");
+    } finally {
+      setLoading(false);
+    }
+  }
   
   const chargeImages=async()=>{
     const images= await InitialImagesService.fetchImages();
@@ -99,7 +112,8 @@ export const IncidentTechnicalVM = () => {
     sendDiagnosis,
     diagnosisData, 
      chargeImages,
-    imagesData
+    imagesData,
+    getData
   };
 };
 

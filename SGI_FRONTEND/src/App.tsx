@@ -39,6 +39,7 @@ import IncidentList from './views/IncidentList/IncidentList';
 import { RolSelector } from './views/RolSelector/RolSelectorV';
 import { IncidentTechnicalV } from './views/IncidentTechnicalV/IncidentTechnicalV';
 import TechnicalIncidentList from './views/TechnicalIncidentListV/TechnicalIncidenListV';
+import { UserIncidentList } from './views/UserIncidentList/UserIncidentList';
 
 setupIonicReact();
 
@@ -47,11 +48,12 @@ const App: React.FC = () => (
     <IonReactRouter>
      
    
-      
+     
       <IonRouterOutlet>
         <Route path="/login" component={Login} exact />
         <Route path="/Cincident" component={CIncident} exact />
         <Route path="/RolSelector" component={RolSelector} exact/>
+        <Route path="/UserIncidentL" component={UserIncidentList} exact/>
         <Route path="/diagnostic" component={CDiagnosis} exact />
         <Route path="/incidentSupervisorList" component={IncidentList} exact />
         <Route path="/TechIncidentDetail" component={IncidentTechnicalV} exact />
@@ -59,7 +61,9 @@ const App: React.FC = () => (
 
         <Redirect exact from="/" to="/login" />
       </IonRouterOutlet>
-      
+     
+
+
 
 
 

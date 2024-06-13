@@ -79,7 +79,6 @@ export const sendFirstImages = async (req, res) => {
   }
 }
 
-
 export const getIncident = async (req, res) => {
   try {
     const incidencias = await Incidencia.findAll({
@@ -91,6 +90,30 @@ export const getIncident = async (req, res) => {
     res.status(500).json({ error: "No se pudieron obtener las incidencias" });
   }
 };
+
+export const getIncidentUser=async(req,res)=>{
+  try {
+    const {CT_CEDULA_USUARIO_CREADOR}= req.query;
+    const data= await Incidencia.findAll({
+      attributes:["CT_CODIGO_INCIDENCIA","CT_TITULO_INCIDENCIA","CT_DESCRIPCION_INCIDENCIA",
+        [
+          sequelize.literal(
+            "(SELECT CT_DESCRIPCION FROM T_ESTADOS WHERE T_ESTADOS.CN_ID_ESTADO = T_INCIDENCIA.CN_ID_ESTADOF)"
+          ),
+          "CT_DESCRIPCION_ESTADO",
+        ],
+      ],
+      where:{
+        CT_CEDULA_USUARIO_CREADOR
+      },
+      order: [["CF_FECHA_HORA_REGISTRO", "DESC"]] 
+    })
+    return res.json(data)
+  } catch (error) {
+    return res.status(404).json({message:"Datos no encontrados"});
+  }
+}
+
 
 //GetImages
 export const getImages=async(req,res)=>{
@@ -132,13 +155,19 @@ export const getTechnicianIncident = async (req, res) => {
     const incidentsData = await Incidencia.findAll({
       attributes: [
         "CT_CODIGO_INCIDENCIA",
-        "CT_DESCRIPCION_INCIDENCIA",
+        "CT_DESCRIPCION_INCIDENCIA","CN_PRIORIDAD",
         [
           sequelize.literal(
             "(SELECT CT_DESCRIPCION FROM T_ESTADOS WHERE T_ESTADOS.CN_ID_ESTADO = T_INCIDENCIA.CN_ID_ESTADOF)"
           ),
           "CT_DESCRIPCION_ESTADO",
         ],
+        [
+          sequelize.literal(
+            "(SELECT CT_IMAGEN FROM T_IMAGENES WHERE T_IMAGENES.CT_CODIGO_INCIDENCIA_R = T_INCIDENCIA.CT_CODIGO_INCIDENCIA LIMIT 1)"
+          ),
+          "IMAGEN",
+        ]
       ],
       where: {
         CT_CODIGO_INCIDENCIA: incidenceIds,
