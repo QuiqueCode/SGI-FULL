@@ -23,22 +23,9 @@ import { IncidentListMV, getIncidentDataList } from "../../viewModels/incidentLi
 import { chevronForward } from "ionicons/icons";
 
 const IncidentList: React.FC = () => {
-const { data,setData,setLoading,setError,loading,error, backToMenu}=IncidentListMV();
+const { data,setData,setLoading,setError,loading,error, backToMenu,fetchData,goToDetail}=IncidentListMV();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await getIncidentDataList();
-        setData(result);
-        setError(null); // Reset error if successful
-      } catch (error) {
-        console.error("Error al obtener incidencias:", error);
-        setError("Failed to fetch incidents");
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -62,7 +49,7 @@ const { data,setData,setLoading,setError,loading,error, backToMenu}=IncidentList
 <IonButton className="reportButton">Reportes</IonButton> <br />
 </div>
    
-      <div className="bodyContainer">
+      <div className="bodyContainerBar">
 
       <IonSearchbar className="custom-searchbar" placeholder="2024-00001"></IonSearchbar> <br />
       
@@ -81,15 +68,12 @@ const { data,setData,setLoading,setError,loading,error, backToMenu}=IncidentList
                {"Descripción: "+incident.CT_DESCRIPCION_INCIDENCIA}
                </IonNote>
              </IonLabel>
-             <IonButton className="inItem">Ingresar</IonButton>
+             <IonButton className="inItem" onClick={()=>{goToDetail(incident.CT_CODIGO_INCIDENCIA)}}>Ingresar</IonButton>
         
            </IonItem>
           
          </IonList>
-      
-         
         ))}
-      
     </IonContent>
   );
 };

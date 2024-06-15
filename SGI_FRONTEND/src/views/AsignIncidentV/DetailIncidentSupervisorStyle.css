@@ -1,0 +1,13 @@
+
+.asgignButton {
+    width: 100%;
+    --background: #4A5568; /* Color de fondo */
+    --color: white; /* Color del texto */
+    --background-hover: #49515f;
+    --background-activated: #49515f;
+    --background-focused: #49515f;
+    
+    --border-radius: 25px;
+
+    
+  }

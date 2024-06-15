@@ -10,10 +10,15 @@ export interface IncidentTechnicianDetailM {
     CT_JUSTIFICACION_CIERRE: string;
     CD_COSTO: number;
     CN_DURACION_GESTION: number;
+    CN_PRIORIDAD:number,
+    CN_RIESGO:number,
+    CN_CATEGORIA:number,
+    CN_AFECTACION:number,
     CT_DESCRIPCION_PRIORIDAD: string;
     CT_DESCRIPCION_RIESGO: string;
     CT_DESCRIPCION_AFECTACION: string;
     CT_DESCRIPCION_CATEGORIA: string;
+
 }
 
 export interface IncidentDiagnosisListM{

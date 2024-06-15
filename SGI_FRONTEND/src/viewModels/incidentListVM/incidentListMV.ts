@@ -20,15 +20,31 @@ export const IncidentListMV=()=>{
     history.push("/RolSelector")
 
   }
+
+  const goToDetail=(id:string)=>{
+    history.push("/supervisorDetail")
+    localStorage.setItem('idIncident',id)
+  }
   
   //Recordar que es el id del incidente.
 
 
-
+  const fetchData = async () => {
+    try {
+      const result = await getIncidentDataList();
+      setData(result);
+      setError(null); // Reset error if successful
+    } catch (error) {
+      console.error("Error al obtener incidencias:", error);
+      setError("Failed to fetch incidents");
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   return{
-    data,setData,setLoading,setError,loading,error, backToMenu
+    data,setData,setLoading,setError,loading,error, backToMenu, fetchData,goToDetail
   }
 }
 

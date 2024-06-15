@@ -1,9 +1,12 @@
-.bodyContainer {
+.bodyContainerBar {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin: 10px;
+  margin-left: 16px;
+  
+
 }
 
 .card {

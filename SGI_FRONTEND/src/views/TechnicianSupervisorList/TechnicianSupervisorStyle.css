@@ -1,0 +1,45 @@
+.titleContainerTech{
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 60px;
+  }
+
+  .asign{
+    width: 100px;
+    height: 30px;
+    padding-left: 16px;
+    --background: #191970;
+    --background-hover: #1a1a5d;
+    --background-activated: #1f1f5f;
+    --background-focused: #191970;
+    
+    
+  
+    --color: rgb(255, 255, 255);
+  
+    --border-radius: 10px;
+    --border-color: #000;
+    --border-style: solid;
+    --border-width: 1px;
+  }
+
+  .notAsign{
+    width: 100px;
+    height: 30px;
+    padding-left: 16px;
+    --background: #9e0909;
+    --background-hover: #9e0909;
+    --background-activated: #a51717;
+    --background-focused: #9e0909;
+    
+    
+  
+    --color: rgb(255, 255, 255);
+  
+    --border-radius: 10px;
+    --border-color: #9e0909;
+    --border-style: solid;
+    --border-width: 1px;
+  }

@@ -30,7 +30,7 @@ const Login: React.FC = () => {
       </div>
 
       <form onSubmit={handleSubmit} style={{ paddingTop: '10px' }}>
-        <span>Correo</span>
+        <span style={{color:'white'}}>Correo</span>
         <IonInput
           class="custom"
           type="email"
@@ -41,7 +41,7 @@ const Login: React.FC = () => {
           style={{ marginBottom: '50px', marginTop: '10px' }}
         />
 
-        <span>Contraseña</span>
+        <span style={{color:'white'}}>Contraseña</span>
         <IonInput
           class="custom"
           type="password"

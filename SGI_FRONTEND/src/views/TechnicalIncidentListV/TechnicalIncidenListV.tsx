@@ -47,11 +47,8 @@ const { data,setData,setLoading,setError,loading,error,backToMenu,goToDetail,get
 
 <IonSearchbar className="custom-searchbar" style={{width:"100%"}} placeholder="2024-00001"></IonSearchbar> <br />
  {data.map((incident,index) => (
-         <IonList inset={true} className="ionL"  >
-           <div className="unread-indicator-wrapper" slot="start">
-              <div className={incident.CN_PRIORIDAD === 1 ? "unread-indicatorL" : incident.CN_PRIORIDAD === 2 ? "unread-indicatorM" : "unread-indicatorH"}></div>
-            </div>
-      <IonCard>
+      
+      <IonCard style={{width:'100%'}}>
       <img 
                
                 src={`http://localhost:3000${incident.IMAGEN}`}
@@ -69,7 +66,7 @@ const { data,setData,setLoading,setError,loading,error,backToMenu,goToDetail,get
       
         
     </IonCard>
-         </IonList>
+        
    
   
  ))}

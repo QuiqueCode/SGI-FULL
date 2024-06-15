@@ -7,9 +7,13 @@ import { IncidentDiagnosisListM, IncidentTechnicianDetailM } from "../../models/
 import { IncidentTechnicianDetailService } from "../../services/GetTechnicianDiagnosisDetailService/IncidentTechnicianDetailService";
 import { InitialImagesService } from "../../services/InitialImagesService/InitialImagesService";
 import { InitialImagesModel } from "../../models/initialImages/InitialImages";
+import { StatuesModel } from "../../models/statuesModel/statuesmode";
+import { GetStatueService } from "../../services/GetStatueService/getStatueService";
 
 export const IncidentTechnicalVM = () => {
   const [data, setData] = useState<IncidentTechnicianListModel[]>([]);
+  const [detail,setDetail]=useState<IncidentTechnicianDetailM>();
+  const [statue,setSatatues]=useState<StatuesModel[]>([])
   const [diagnosisData,setDiagnosis]=useState<IncidentDiagnosisListM[]>([]);;
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -17,7 +21,10 @@ export const IncidentTechnicalVM = () => {
   const history = useHistory();
 
 
-  
+  const getStatues=async()=>{
+    const data= await GetStatueService.fetchStatues();
+    setSatatues(data)
+  }
 
   const moveToDiagnostic = () => {
     history.push("/diagnostic");
@@ -59,9 +66,8 @@ export const IncidentTechnicalVM = () => {
 
    const setDetails=async()=>{
     try {
-      const id:any=localStorage.getItem('idIncident');
-      const dataDetails= await IncidentTechnicianDetailService.viewTechnicianIncidentDetail(id);
-      setData(dataDetails)
+      const dataDetails= await IncidentTechnicianDetailService.viewTechnicianIncidentDetail();
+      setDetail(dataDetails)
     } catch (error) {
       console.log(error)
     }
@@ -113,7 +119,10 @@ export const IncidentTechnicalVM = () => {
     diagnosisData, 
      chargeImages,
     imagesData,
-    getData
+    getData,
+    detail,
+    statue,
+    getStatues
   };
 };
 

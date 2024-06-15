@@ -208,6 +208,10 @@ export const getIncidentData = async (req, res) => {
         'CT_JUSTIFICACION_CIERRE',
         'CD_COSTO',
         'CN_DURACION_GESTION',
+        'CN_PRIORIDAD',
+        'CN_RIESGO',
+        'CN_CATEGORIA',
+        'CN_AFECTACION',
         [
           sequelize.literal(
             "(SELECT CT_DESCRIPCION FROM T_PRIORIDAD WHERE T_INCIDENCIA.CN_PRIORIDAD = T_PRIORIDAD.CN_ID_PRIORIDAD)"
@@ -266,5 +270,21 @@ export const getIncidentData = async (req, res) => {
     res.status(500).json({ error: "No se pudieron obtener los datos del incidente" });
   }
 };
+
+
+//Asignar
+
+export const technicianAsign= async(req,res)=>{
+  try {
+  const {CT_CEDULA_USUARIO_R,CT_CODIGO_INCIDENCIA_R}=req.query
+
+  await UsuarioxIncidenciaAsignacion.create({CT_CEDULA_USUARIO_R,CT_CODIGO_INCIDENCIA_R})
+  res.status(200).json({ msg: "Asignacion Realizada" });
+  } catch (error) {
+    console.error("Error al asignar:", error);
+    res.status(500).json({ error: "No se pudo realizar la asignacion" });
+  }
+
+}
 
 

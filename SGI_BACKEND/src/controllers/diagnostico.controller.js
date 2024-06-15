@@ -1,4 +1,5 @@
 import { Diagnostico } from "../models/Diagnostico.js";
+import { Incidencia } from "../models/Incidencia.js";
 import { IncidenciaXDiagnostico } from "../models/Incidencia_diagnostico.js";
 
 export const createDiagnosis = async (req, res) => {
@@ -24,7 +25,17 @@ export const createDiagnosis = async (req, res) => {
           
           const CN_ID_DIAGNOSTICO_R=nuevoDiagnostico.CN_ID_DIAGNOSTICO;
           await IncidenciaXDiagnostico.create({CT_CODIGO_INCIDENCIA_R:CT_ID_INCIDENCIA,CN_ID_DIAGNOSTICO_R,CT_CEDULA_R:CT_TECNICO})
-          return res.status(201).json({msg:'Diagnostico creado con exito'});
+
+          await Incidencia.update(
+            { CN_DURACION_GESTION: CN_TIEMPO_SOLUCION_ESTIMADO },
+            {
+              where: {
+                CT_CODIGO_INCIDENCIA: CT_ID_INCIDENCIA
+              },
+            },
+          );
+
+        return res.status(201).json({msg:'Diagnostico creado con exito'});
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }

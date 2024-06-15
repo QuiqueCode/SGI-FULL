@@ -1,8 +1,9 @@
 import axios from "axios";
 
 export class IncidentTechnicianDetailService {
-    static async viewTechnicianIncidentDetail(id:string) {
+    static async viewTechnicianIncidentDetail() {
         try {
+            const id=localStorage.getItem('idIncident');
             const response = await axios.get(
                  `http://localhost:3000/api/gIncidentInfo?CT_CODIGO_INCIDENCIA=${id}`
                
