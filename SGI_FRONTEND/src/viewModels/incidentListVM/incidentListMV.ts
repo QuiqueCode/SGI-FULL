@@ -22,10 +22,13 @@ export const IncidentListMV=()=>{
   }
 
   const goToDetail=(id:string)=>{
-    history.push("/supervisorDetail")
+    history.push("/managerDetail")
     localStorage.setItem('idIncident',id)
   }
-  
+  const goToReport=()=>{
+    
+    history.push('/reportSelector')
+  }
   //Recordar que es el id del incidente.
 
 
@@ -44,7 +47,7 @@ export const IncidentListMV=()=>{
 
 
   return{
-    data,setData,setLoading,setError,loading,error, backToMenu, fetchData,goToDetail
+    data,setData,setLoading,setError,loading,error, backToMenu, fetchData,goToDetail,goToReport
   }
 }
 

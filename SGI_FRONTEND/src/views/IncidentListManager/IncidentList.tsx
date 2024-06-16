@@ -23,7 +23,7 @@ import { IncidentListMV, getIncidentDataList } from "../../viewModels/incidentLi
 import { chevronForward } from "ionicons/icons";
 
 const IncidentList: React.FC = () => {
-const { data,setData,setLoading,setError,loading,error, backToMenu,fetchData,goToDetail}=IncidentListMV();
+const { data,setData,setLoading,setError,loading,error, backToMenu,fetchData,goToDetail,goToReport}=IncidentListMV();
 
   useEffect(() => {
     fetchData();
@@ -46,7 +46,7 @@ const { data,setData,setLoading,setError,loading,error, backToMenu,fetchData,goT
         <h1 style={{color:'#C0C0C0'}}>Lista de incidencia</h1>
         </div>
 <div className="reportContainer">
-<IonButton className="reportButton">Reportes</IonButton> <br />
+<IonButton className="reportButton" onClick={()=>{goToReport()}}>Reportes</IonButton> <br />
 </div>
    
       <div className="bodyContainerBar">

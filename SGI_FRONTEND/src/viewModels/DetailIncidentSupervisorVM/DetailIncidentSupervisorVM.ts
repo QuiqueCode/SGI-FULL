@@ -2,11 +2,13 @@ import { useState } from "react";
 import { IncidentDiagnosisListM, IncidentTechnicianDetailM } from "../../models/IncidenTechnicianDetailModel/IncidentTechnicianDetailM";
 import { useHistory } from "react-router";
 import { AffectationModel, CategoryModel, RiskModel, StatuesModel } from "../../models/statuesModel/statuesmode";
-import { InitialImagesModel } from "../../models/initialImages/InitialImages";
+import { FinalImagesModel, InitialImagesModel } from "../../models/initialImages/InitialImages";
 import { GetStatueService } from "../../services/GetStatueService/getStatueService";
 import { IncidentTechnicianDetailService } from "../../services/GetTechnicianDiagnosisDetailService/IncidentTechnicianDetailService";
 import { InitialImagesService } from "../../services/InitialImagesService/InitialImagesService";
 import { DiagnosisIncidentListService } from "../../services/IncidentTechnicianListService/IncidentTechnicianListS";
+import { SetAffectationModel, SetCategoryModel, SetRiskModel, StatueModel } from "../../models/SetStatuesModel/SetSatuesModel";
+import { SetStatueService } from "../../services/SetStatuesService/SetStatuesService";
 
 
 export const DetailIncidentSupervisorVM=()=>{
@@ -14,6 +16,8 @@ export const DetailIncidentSupervisorVM=()=>{
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [imagesData,setImagesData]=useState<InitialImagesModel[]>([]);
+    const [imagesData2,setImagesData2]=useState<FinalImagesModel[]>([]);
+
     const [diagnosisData,setDiagnosis]=useState<IncidentDiagnosisListM[]>([]);;
     const history = useHistory();
 
@@ -21,6 +25,10 @@ export const DetailIncidentSupervisorVM=()=>{
     const [risk,setRisk]=useState<RiskModel[]>([])
     const [affectation,setAffectation]=useState<AffectationModel[]>([]);
     const [category,setCategory]=useState<CategoryModel[]>([]);
+
+    //Statues
+   
+  
 
     const getStatues=async()=>{
         const data= await GetStatueService.fetchStatues();
@@ -73,8 +81,10 @@ export const DetailIncidentSupervisorVM=()=>{
         }
       }
       const chargeImages=async()=>{
-        const images= await InitialImagesService.fetchImages();
+        const images= await InitialImagesService.fetchImages(0);
+        const images2= await InitialImagesService.fetchImages(1);
         setImagesData(images);
+        setImagesData2(images2)
       }
       const sendDiagnosis= async()=>{
         try {
@@ -86,8 +96,57 @@ export const DetailIncidentSupervisorVM=()=>{
         }
       }
       const backToSupervisorList=()=>{
-        history.push('/incidentSupervisorList')
+        history.push('/incidentManagerList')
       }
+
+      //Handles
+      const handleStatue= async(value:StatueModel)=>{
+        const statue: StatueModel = value;
+        try {
+          await SetStatueService.setStatue(statue);
+          console.log("Estado cambiado")
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
+      const handleRisk= async(value:SetRiskModel)=>{
+        const risk: SetRiskModel = value;
+        try {
+          await SetStatueService.setRisk(risk);
+          console.log("Riesgo cambiado")
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      
+      const handleAffectation= async(value:SetAffectationModel)=>{
+        const affectation: SetAffectationModel = value;
+        try {
+          await SetStatueService.setAffectation(affectation);
+          console.log("Afectacion cambiada")
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      const handleCategory= async(value:SetCategoryModel)=>{
+        const category: SetCategoryModel = value;
+        try {
+          await SetStatueService.setCategory(category);
+          console.log("Categoría cambiada")
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      
+
+const goToJustify=()=>{
+  history.push('./justifyClousure')
+}
+
+   
+
+
    
 
     return{
@@ -112,6 +171,12 @@ export const DetailIncidentSupervisorVM=()=>{
         diagnosisData,
         backToSupervisorList,
         goToAsign,
+        handleStatue,
+        handleRisk,
+        handleAffectation,
+        handleCategory,
+        goToJustify,
+        imagesData2
      
         
     }

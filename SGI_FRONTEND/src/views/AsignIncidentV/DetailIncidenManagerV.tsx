@@ -1,4 +1,4 @@
-import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonContent, IonIcon, IonItem, IonItemOption, IonLabel, IonList, IonNote, IonSelect, IonSelectOption } from "@ionic/react";
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonIcon, IonItem, IonItemOption, IonLabel, IonList, IonNote, IonSelect, IonSelectOption } from "@ionic/react";
 import { build, calendar, cog, navigate, play, shield } from "ionicons/icons";
 import "./DetailIncidentSupervisorStyle.css"
 import { DetailIncidentSupervisorVM } from "../../viewModels/DetailIncidentSupervisorVM/DetailIncidentSupervisorVM";
@@ -26,6 +26,13 @@ export function DetailIncidentSupervisroV(){
     diagnosisData,
   backToSupervisorList,
   goToAsign,
+  handleStatue,
+  handleRisk,
+  handleAffectation,
+  handleCategory,
+  goToJustify,
+  imagesData2
+
 }= DetailIncidentSupervisorVM();
 
     useEffect(() => {
@@ -82,7 +89,7 @@ export function DetailIncidentSupervisroV(){
     aria-label="Statue"
     placeholder="Seleccionar estado"
     onIonChange={(e) =>
-      console.log(`ionChange fired with value: ${e.detail.value}`)
+      handleStatue({CN_ID_ESTADOF:e.detail.value,CT_CODIGO_INCIDENCIA:localStorage.getItem('idIncident')||''})
     }
     value={detail?.CN_ID_ESTADOF}
     onIonCancel={() => console.log("ionCancel fired")}
@@ -108,8 +115,7 @@ export function DetailIncidentSupervisroV(){
     placeholder="Seleccionar riesgo"
     value={detail?.CN_RIESGO}
     onIonChange={(e) =>
-      console.log(`ionChange fired with value: ${e.detail.value}`)
-
+      handleRisk({CN_RIESGO:e.detail.value,CT_CODIGO_INCIDENCIA:localStorage.getItem('idIncident')||''})
     }
     
     onIonCancel={() => console.log("ionCancel fired")}
@@ -134,7 +140,7 @@ export function DetailIncidentSupervisroV(){
     placeholder="Seleccionar afectación"
     value={detail?.CN_AFECTACION}
     onIonChange={(e) =>
-      console.log(`ionChange fired with value: ${e.detail.value}`)
+        handleAffectation({CN_AFECTACION:e.detail.value,CT_CODIGO_INCIDENCIA:localStorage.getItem('idIncident')||''})
     }
     onIonCancel={() => console.log("ionCancel fired")}
     onIonDismiss={() => console.log("ionDismiss fired")}
@@ -152,7 +158,7 @@ export function DetailIncidentSupervisroV(){
             <div className="icon-text">
               <IonIcon icon={navigate} className="icon" />
               <span style={{ marginRight: "15px" }}>
-                {"Lugar de afectación: "}
+                {"Lugar de afectación: "+ detail?.CT_LUGAR_DE_INCIDENCIA}
               </span>
             
             </div>
@@ -164,7 +170,7 @@ export function DetailIncidentSupervisroV(){
     aria-label="Statue"
     placeholder="Seleccionar categoría"
     onIonChange={(e) =>
-      console.log(`ionChange fired with value: ${e.detail.value}`)
+      handleCategory({CN_CATEGORIA:e.detail.value,CT_CODIGO_INCIDENCIA:localStorage.getItem('idIncident')||''})
     }
     onIonCancel={() => console.log("ionCancel fired")}
     onIonDismiss={() => console.log("ionDismiss fired")}
@@ -192,7 +198,7 @@ export function DetailIncidentSupervisroV(){
                   {"Descripción: "} <br />
           
                <IonNote color="secondary" className="ion-text-wrap">
-               {"Descripcion de la incidencia"}
+               {detail?.CT_DESCRIPCION_INCIDENCIA}
                  </IonNote>
                  </IonLabel>
      
@@ -210,19 +216,33 @@ export function DetailIncidentSupervisroV(){
               <IonCardHeader>
                 <IonCardTitle class="cardtitle">Imagenes iniciales</IonCardTitle>
               </IonCardHeader>
-              {/*imagesData.map((image, index) => (
+              {imagesData.map((image, index) => (
                 <img
                   key={image.CT_ID_IMAGEN}
                   src={`http://localhost:3000${image.CT_IMAGEN}`}
                   alt={`Imagen ${image.CT_ID_IMAGEN}`}
                 />
-              ))*/}
+              ))}
+            </IonCard>
+          </div>
+          <div className="cardContainer">
+            <IonCard className="cardInfo">
+              <IonCardHeader>
+                <IonCardTitle class="cardtitle">Imagenes finales</IonCardTitle>
+              </IonCardHeader>
+              {imagesData2.map((image, index) => (
+                <img
+                  key={image.CT_ID_IMAGEN}
+                  src={`http://localhost:3000${image.CT_IMAGEN}`}
+                  alt={`Imagen ${image.CT_ID_IMAGEN}`}
+                />
+              ))}
             </IonCard>
           </div>
           <div className="cardContainer">
          
          
-          {/*diagnosisData.map((data, index) => (
+          {diagnosisData.map((data, index) => (
            
              <IonList style={{width:"100%",marginBottom:"10px",borderRadius:"8px"}}>
              <IonItem detail={false}>
@@ -247,12 +267,19 @@ export function DetailIncidentSupervisroV(){
          
            </IonList>
            
-          ))*/}
+          ))}
+          <IonCard style={{width:"100%"}}>
+      <IonCardHeader>
+        <IonCardTitle>Justificación de cierre</IonCardTitle>
+       
+      </IonCardHeader>
+
+      <IonCardContent>{detail?.CT_JUSTIFICACION_CIERRE}</IonCardContent>
+    </IonCard>
            </div>
           
-            <IonButton className="button2">Justificación de cierre</IonButton>
+            <IonButton className="button2" onClick={()=>{goToJustify()}}>Justificación de cierre</IonButton>
         
-          
         </IonContent>
       </>
     )

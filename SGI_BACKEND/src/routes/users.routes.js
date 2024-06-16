@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { getAsignUsers, login } from "../controllers/user.controller.js";
-import { createIncident, getImages, getIncident, getIncidentData, getIncidentUser, getTechnicianIncident, sendFirstImages, technicianAsign } from "../controllers/incident.controller.js";
+import { createIncident, getImages, getIncident, getIncidentData, getIncidentUser, getSupervisorIncident, getTechnicianIncident, jusitfyClousure, sendFirstImages, sendLastImages, technicianAsign } from "../controllers/incident.controller.js";
 import { createDiagnosis, getDiagnosis } from "../controllers/diagnostico.controller.js";
 import multer from "multer";
 import { storage } from "./midleware.js";
-import { getAffectation, getCategory, getRisk, getStatue } from "../controllers/statues.controller.js";
+import { getAffectation, getCategory, getRisk, getStatue, getTechStatue, updateAffectation, updateCategory, updateRisk, updateStatue } from "../controllers/statues.controller.js";
+import { workReport } from "../controllers/report.controller.js";
 
 
 
@@ -13,6 +14,7 @@ const upload = multer({ storage })
 
 //Images
 router.post('/imagesCIncident', upload.single('file'),sendFirstImages );
+router.post('/lastImagesCIncident', upload.single('file'),sendLastImages );
 router.get('/imagesDetailIncident',getImages );
 
 //User
@@ -25,6 +27,8 @@ router.get('/gIncident',getIncident);
 router.get("/gTechIncidents",getTechnicianIncident);
 router.get("/gIncidentInfo",getIncidentData);
 router.post("/asignTech",technicianAsign);
+router.post("/cJustify",jusitfyClousure);
+router.get("/gSupervisorIncident",getSupervisorIncident);
 
 //Diagnosis
 router.post('/cDiagnosis',createDiagnosis);
@@ -32,12 +36,23 @@ router.get('/gDiagnosisLi',getDiagnosis);
 
 //Statues
 router.get('/gStatue',getStatue);
+router.get('/gTechStatue',getTechStatue);
 router.get('/gRisk',getRisk);
 router.get('/gAffectation',getAffectation);
 router.get('/gCategory',getCategory);
 
 //Obtener usuarios
 router.get('/gAsignUsers',getAsignUsers);
+
+
+//Actualizar estados
+router.post('/uStatue',updateStatue);
+router.post('/uRisk',updateRisk);
+router.post('/uAffectation',updateAffectation);
+router.post('/uCategory',updateCategory);
+
+//Reportes
+router.get('/gWorkR',workReport);
 
 
 export default router

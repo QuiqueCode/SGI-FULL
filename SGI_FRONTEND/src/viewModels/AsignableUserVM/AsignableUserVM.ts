@@ -8,7 +8,7 @@ export function AsignableUserVM(){
     const [asignableUser,setAsignableUser]=useState<AsignableUserModel[]>([])
     const history=useHistory()
     const goBack=()=>{
-        history.push('/supervisorDetail')
+        history.push('/managerDetail')
       }
     const getUserList=async()=>{
         try {
@@ -19,9 +19,20 @@ export function AsignableUserVM(){
             console.log("Fallo al extraer los datos de los usuarios")
         }   
     }
+    const techAsign= async(id:any)=>{
+        const CT_CEDULA_USUARIO_R = id;
+        try {
+        await AsignableUserService.techAsign(CT_CEDULA_USUARIO_R);  
+        getUserList();
+        console.log("Usuario asignado") 
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return{
         getUserList,
         asignableUser,
-        goBack
+        goBack,
+        techAsign
     }
 }

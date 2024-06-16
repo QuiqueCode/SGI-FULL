@@ -35,13 +35,17 @@ import './theme/variables.css';
 import Login from './views/LoginView/LoginV';
 import CIncident from './views/CreateIncident/CIncidentV';
 import CDiagnosis from './views/CreateDiagnosis/CDiagnosis';
-import IncidentList from './views/IncidentListAttendant/IncidentList';
+import IncidentList from './views/IncidentListManager/IncidentList';
 import { RolSelector } from './views/RolSelector/RolSelectorV';
 import { IncidentTechnicalV } from './views/IncidentTechnicalV/IncidentTechnicalV';
 import TechnicalIncidentList from './views/TechnicalIncidentListV/TechnicalIncidenListV';
 import { UserIncidentList } from './views/UserIncidentList/UserIncidentList';
-import { DetailIncidentSupervisroV } from './views/AsignIncidentV/DetailIncidenSupervisortV';
+import { DetailIncidentSupervisroV } from './views/AsignIncidentV/DetailIncidenManagerV';
 import { TechnicianSupervisorList } from './views/TechnicianSupervisorList/TechnicianSupervisorList';
+import JustifyClousure from './views/JustifyClosure/JustifyClousure';
+import WorkReportV from './views/WorkReportV/WorkReportV';
+import ReportSelectorV from './views/ReportSelectorV/ReportSelectorV';
+import SupervisorIncidentCloseV from './views/SupervisorIncidentCloseV/SupervisorIncidentCloseV';
 
 setupIonicReact();
 
@@ -57,15 +61,24 @@ const App: React.FC = () => (
         <Route path="/RolSelector" component={RolSelector} exact/>
         <Route path="/UserIncidentL" component={UserIncidentList} exact/>
         <Route path="/diagnostic" component={CDiagnosis} exact />
-        <Route path="/incidentSupervisorList" component={IncidentList} exact />
+
+        <Route path="/incidentManagerList" component={IncidentList} exact />
+        <Route path="/managerDetail" component={DetailIncidentSupervisroV} exact />
+
         <Route path="/TechIncidentDetail" component={IncidentTechnicalV} exact />
         <Route path="/TechIncidentsList" component={TechnicalIncidentList} exact />
-        <Route path="/supervisorDetail" component={DetailIncidentSupervisroV} exact />
+
+       
         <Route path="/techAsignL" component={TechnicianSupervisorList} exact />
+        <Route path="/justifyClousure" component={JustifyClousure} exact />
+        <Route path="/workReport" component={WorkReportV} exact />
+        <Route path="/reportSelector" component={ReportSelectorV} exact />
+        <Route path="/SupervisorCloseList" component={SupervisorIncidentCloseV} exact />
 
         <Redirect exact from="/" to="/login" />
       </IonRouterOutlet>
      
+    
 
 
 

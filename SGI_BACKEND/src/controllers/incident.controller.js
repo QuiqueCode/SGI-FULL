@@ -1,4 +1,4 @@
-import { where } from "sequelize";
+import { json, where } from "sequelize";
 import { sequelize } from "../database/database.js";
 import { UsuarioxIncidenciaAsignacion } from "../models/Asigna.js";
 import { Estados } from "../models/Estados.js";
@@ -79,6 +79,21 @@ export const sendFirstImages = async (req, res) => {
   }
 }
 
+export const sendLastImages = async (req, res) => {
+
+  try {
+    const {CT_CODIGO_INCIDENCIA_R}=req.query
+    const CT_IMAGEN = `/images/${req.file.filename}`
+    const sendImages=await Imagenes.create({
+      CT_CODIGO_INCIDENCIA_R,CB_TIPO:1,CT_IMAGEN
+    })
+    return res.json(sendImages);
+  } catch (error) {
+    return InternalError(res, error);
+  }
+}
+
+
 export const getIncident = async (req, res) => {
   try {
     const incidencias = await Incidencia.findAll({
@@ -118,14 +133,15 @@ export const getIncidentUser=async(req,res)=>{
 //GetImages
 export const getImages=async(req,res)=>{
 try {
-  const {CT_CODIGO_INCIDENCIA_R}=req.query;
+  const {CT_CODIGO_INCIDENCIA_R,CB_TIPO}=req.query;
   const images= await Imagenes.findAll({
     attributes:[
       "CT_ID_IMAGEN",
       "CT_IMAGEN"
     ],
     where:{
-      CT_CODIGO_INCIDENCIA_R
+      CT_CODIGO_INCIDENCIA_R,
+      CB_TIPO
     }
   })
   res.json(images);
@@ -279,6 +295,14 @@ export const technicianAsign= async(req,res)=>{
   const {CT_CEDULA_USUARIO_R,CT_CODIGO_INCIDENCIA_R}=req.query
 
   await UsuarioxIncidenciaAsignacion.create({CT_CEDULA_USUARIO_R,CT_CODIGO_INCIDENCIA_R})
+  await Incidencia.update(
+    { CN_ID_ESTADOF: 2 },
+    {
+      where: {
+        CT_CODIGO_INCIDENCIA: CT_CODIGO_INCIDENCIA_R
+      },
+    },
+  );
   res.status(200).json({ msg: "Asignacion Realizada" });
   } catch (error) {
     console.error("Error al asignar:", error);
@@ -286,5 +310,36 @@ export const technicianAsign= async(req,res)=>{
   }
 
 }
+// Justificacion de cierre
 
+export const jusitfyClousure=async(req,res)=>{
+  const {CT_JUSTIFICACION_CIERRE,CT_CODIGO_INCIDENCIA}=req.body;
+  try {
+    await Incidencia.update(
+      {CT_JUSTIFICACION_CIERRE},
+      {
+        where:{
+          CT_CODIGO_INCIDENCIA
+        }
+      }
+    )
+    res.status(200).json({msg:"Justificacón almacenada"})
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({msg:"Error al realizar la justificación"})
+  }
+}
 
+export const getSupervisorIncident= async(req,res)=>{
+  try {
+    const data= await Incidencia.findAll({
+      attributes:["CT_CODIGO_INCIDENCIA","CT_TITULO_INCIDENCIA","CT_DESCRIPCION_INCIDENCIA"],
+      where:{
+        CN_ID_ESTADOF:7
+      }
+    })
+    return res.status(200).json(data)
+  } catch (error) {
+    res.status(500).json({msg:"Error al obtener Incidencias"})
+  }
+}

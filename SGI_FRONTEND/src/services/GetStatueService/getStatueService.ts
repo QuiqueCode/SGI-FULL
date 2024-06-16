@@ -12,6 +12,16 @@ export class GetStatueService {
             throw new Error('Error al obtener los estados');
         }
     }
+    static async fetchTechStatues(): Promise<StatuesModel[]> {
+        try {
+            const dataUser = localStorage.getItem('UserData') ?? '';
+            const response = await fetch(`http://localhost:3000/api/gTechStatue`);
+            const data: StatuesModel[] = await response.json();
+            return data;
+        } catch (error) {
+            throw new Error('Error al obtener los estados');
+        }
+    }
     static async fetchRisk(): Promise<RiskModel[]> {
         try {
             const dataUser = localStorage.getItem('UserData') ?? '';

@@ -11,7 +11,7 @@ import { AsignableUserVM } from "../../viewModels/AsignableUserVM/AsignableUserV
 import { useEffect } from "react";
 
 export function TechnicianSupervisorList() {
-  const { getUserList, asignableUser,goBack  } = AsignableUserVM();
+  const { getUserList, asignableUser,goBack,techAsign  } = AsignableUserVM();
 
   useEffect(()=>{
     getUserList();
@@ -37,7 +37,7 @@ export function TechnicianSupervisorList() {
                 {"Carga de trabajo: " + (data.DURACION_TOTAL==null?0:data.DURACION_TOTAL)+"h"}
               </IonNote>
             </IonLabel>
-            <IonButton className="asign" disabled={data.INCIDENCIA_ASIGNADA}>{data.INCIDENCIA_ASIGNADA?"Asignado":"Asignar"}</IonButton>
+            <IonButton className="asign" onClick={()=>{techAsign(data.CT_CEDULA_USUARIO_R)}} disabled={data.INCIDENCIA_ASIGNADA}>{data.INCIDENCIA_ASIGNADA?"Asignado":"Asignar"}</IonButton>
           </IonItem>
         </IonList>
       ))}

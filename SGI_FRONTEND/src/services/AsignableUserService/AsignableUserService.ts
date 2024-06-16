@@ -1,3 +1,4 @@
+import axios from "axios";
 import { AsignableUserModel } from "../../models/AsignableUsersModel/AsignableUserModel";
 
 export class AsignableUserService {
@@ -10,4 +11,13 @@ export class AsignableUserService {
             throw new Error('Error al obtener los técnicos');
         }
     }
+    static async techAsign(id:any) {
+        try {
+            const response = await axios.post(`http://localhost:3000/api/asignTech?CT_CEDULA_USUARIO_R=${id}&CT_CODIGO_INCIDENCIA_R=${localStorage.getItem('idIncident')}`);
+            console.log("Asignacion completa")
+        } catch (error) {
+            throw new Error('Error al obtener los técnicos');
+        }
+    }
+
 }
