@@ -4,7 +4,7 @@ import "./DetailIncidentSupervisorStyle.css"
 import { DetailIncidentSupervisorVM } from "../../viewModels/DetailIncidentSupervisorVM/DetailIncidentSupervisorVM";
 import { useEffect } from "react";
 
-export function DetailIncidentSupervisroV(){
+export function DetailIncidentManagerV(){
   const { setDetails,
     getStatues,
     getAffectation,

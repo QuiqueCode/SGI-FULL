@@ -18,7 +18,7 @@ export const SupervisorIncidentCloseVM=()=>{
         setIncidentL(data)
     }
     const goToDetail=(id:string)=>{
-        //history.push("/managerDetail")
+        history.push("/SupervisorIncidentDetail")
         localStorage.setItem('idIncident',id)
       }
     return {

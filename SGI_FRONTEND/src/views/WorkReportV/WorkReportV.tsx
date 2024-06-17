@@ -24,14 +24,7 @@ export default function WorkReportV() {
         <h1 style={{ color: "#C0C0C0" }}>Reporte cargas de trabajo</h1>
       </div>
 
-      <div className="headerContainer">
-
-        <IonSearchbar
-          className="custom-searchbar"
-          placeholder="2024-00001"
-        ></IonSearchbar>{" "}
-        <br />
-      </div>
+    <br /> <br />
    {data.map((info,index)=>(
 
 <IonList inset={true} >

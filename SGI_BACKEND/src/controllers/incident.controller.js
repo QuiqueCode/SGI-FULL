@@ -343,3 +343,21 @@ export const getSupervisorIncident= async(req,res)=>{
     res.status(500).json({msg:"Error al obtener Incidencias"})
   }
 }
+
+export const setCost=async(req,res)=>{
+  try {
+  const {CT_CODIGO_INCIDENCIA,CD_COSTO}=req.body
+  await Incidencia.update(
+    {CD_COSTO},
+    {
+    where:{
+      CT_CODIGO_INCIDENCIA
+    }
+  }
+  )
+  res.status(200).json({msg:"Costo Actualizado"})
+  } catch (error) {
+    res.status(500).json({msg:"Error al ingresar el costo"})
+    console.log(error)
+  }
+}

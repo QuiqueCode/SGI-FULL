@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { getAsignUsers, login } from "../controllers/user.controller.js";
-import { createIncident, getImages, getIncident, getIncidentData, getIncidentUser, getSupervisorIncident, getTechnicianIncident, jusitfyClousure, sendFirstImages, sendLastImages, technicianAsign } from "../controllers/incident.controller.js";
+import { createIncident, getImages, getIncident, getIncidentData, getIncidentUser, getSupervisorIncident, getTechnicianIncident, jusitfyClousure, sendFirstImages, sendLastImages, setCost, technicianAsign } from "../controllers/incident.controller.js";
 import { createDiagnosis, getDiagnosis } from "../controllers/diagnostico.controller.js";
 import multer from "multer";
 import { storage } from "./midleware.js";
-import { getAffectation, getCategory, getRisk, getStatue, getTechStatue, updateAffectation, updateCategory, updateRisk, updateStatue } from "../controllers/statues.controller.js";
+import { getAffectation, getCategory, getRisk, getStatue, getSupervisorStatue, getTechStatue, updateAffectation, updateCategory, updateRisk, updateStatue } from "../controllers/statues.controller.js";
 import { workReport } from "../controllers/report.controller.js";
 
 
@@ -29,6 +29,8 @@ router.get("/gIncidentInfo",getIncidentData);
 router.post("/asignTech",technicianAsign);
 router.post("/cJustify",jusitfyClousure);
 router.get("/gSupervisorIncident",getSupervisorIncident);
+//Change
+router.patch("/uCost",setCost)
 
 //Diagnosis
 router.post('/cDiagnosis',createDiagnosis);
@@ -37,6 +39,7 @@ router.get('/gDiagnosisLi',getDiagnosis);
 //Statues
 router.get('/gStatue',getStatue);
 router.get('/gTechStatue',getTechStatue);
+router.get('/gSupervisorStatue',getSupervisorStatue);
 router.get('/gRisk',getRisk);
 router.get('/gAffectation',getAffectation);
 router.get('/gCategory',getCategory);

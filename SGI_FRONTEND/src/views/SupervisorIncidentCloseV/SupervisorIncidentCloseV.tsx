@@ -13,7 +13,7 @@ export default function SupervisorIncidentCloseV() {
   return (
     <IonContent fullscreen>
     <div className="backContainer">
-   <p onClick={()=>{goToMenu}}>ATRÁS</p> 
+   <p onClick={()=>{goToMenu()}}>ATRÁS</p> 
  </div>
  <div className="titleContainer">
  <h1 style={{color:'#C0C0C0'}}>Incidencias terminadas</h1>

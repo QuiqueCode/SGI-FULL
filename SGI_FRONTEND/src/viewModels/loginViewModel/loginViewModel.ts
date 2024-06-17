@@ -1,4 +1,4 @@
-import { useIonLoading } from "@ionic/react";
+import { useIonLoading, useIonToast } from "@ionic/react";
 import { useState } from "react";
 import { LoginModel } from "../../models/loginModel/login.model";
 import { LoginService } from "../../services/LoginService/LoginService";
@@ -6,12 +6,21 @@ import { useHistory } from "react-router";
 
 export function LoginViewModel() {
   const [present, dismiss] = useIonLoading();
-
+  const [presentT] = useIonToast();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const history =useHistory();
+
+  const presentToast = () => {
+    presentT({
+      message: 'Usuario o contraseña incorrecto!',
+      duration: 2000,
+      position: "top",
+      color:"danger"
+    });
+  };
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -40,6 +49,7 @@ export function LoginViewModel() {
   
       
     } catch (error) {
+      presentToast();
       //setShowAlert(true);
       console.error("Error logging in:", error);
     } 

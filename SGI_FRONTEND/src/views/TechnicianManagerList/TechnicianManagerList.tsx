@@ -10,7 +10,7 @@ import "./TechnicianSupervisorStyle.css";
 import { AsignableUserVM } from "../../viewModels/AsignableUserVM/AsignableUserVM";
 import { useEffect } from "react";
 
-export function TechnicianSupervisorList() {
+export function TechnicianManagerList() {
   const { getUserList, asignableUser,goBack,techAsign  } = AsignableUserVM();
 
   useEffect(()=>{

@@ -30,7 +30,18 @@ export const getTechStatue = async (req, res) => {
     return error;
   }
 };
-
+export const getSupervisorStatue = async (req, res) => {
+  try {
+      const data = await Estados.findAll({
+      where: {
+        CN_ID_ESTADO: [8,9,10]
+      }
+    });
+    return res.json(data);
+  } catch (error) {
+    return error;
+  }
+};
 
 export const getRisk = async (req, res) => {
   try {

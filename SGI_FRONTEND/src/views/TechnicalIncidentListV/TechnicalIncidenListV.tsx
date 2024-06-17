@@ -59,8 +59,9 @@ const { data,setData,setLoading,setError,loading,error,backToMenu,goToDetail,get
         <IonCardSubtitle>{"Incidencia: " + incident.CT_CODIGO_INCIDENCIA}</IonCardSubtitle>
       </IonCardHeader>
 
-      <IonCardContent> {incident.CT_DESCRIPCION_INCIDENCIA} <br />
-        {"Estado: "+incident.CT_DESCRIPCION_ESTADO}<br /><br />
+      <IonCardContent > {incident.CT_DESCRIPCION_INCIDENCIA} <br />
+      Estado: <IonNote color={"danger"}> {incident.CT_DESCRIPCION_ESTADO}</IonNote>
+       <br /><br />
       <IonButton
              slot="end" className="inButton" onClick={()=>{goToDetail(incident.CT_CODIGO_INCIDENCIA)}}> Ingresar</IonButton>
       </IonCardContent>
