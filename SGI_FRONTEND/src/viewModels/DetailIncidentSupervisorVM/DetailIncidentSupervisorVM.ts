@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { IncidentDiagnosisListM, IncidentTechnicianDetailM } from "../../models/IncidenTechnicianDetailModel/IncidentTechnicianDetailM";
 import { useHistory } from "react-router";
-import { AffectationModel, CategoryModel, RiskModel, StatuesModel } from "../../models/statuesModel/statuesmode";
+import { AffectationModel, CategoryModel, PriorityModel, RiskModel, StatuesModel } from "../../models/statuesModel/statuesmode";
 import { FinalImagesModel, InitialImagesModel } from "../../models/initialImages/InitialImages";
 import { GetStatueService } from "../../services/GetStatueService/getStatueService";
 import { IncidentTechnicianDetailService } from "../../services/GetTechnicianDiagnosisDetailService/IncidentTechnicianDetailService";
 import { InitialImagesService } from "../../services/InitialImagesService/InitialImagesService";
 import { DiagnosisIncidentListService } from "../../services/IncidentTechnicianListService/IncidentTechnicianListS";
-import { SetAffectationModel, SetCategoryModel, SetRiskModel, StatueModel } from "../../models/SetStatuesModel/SetSatuesModel";
+import { SetAffectationModel, SetCategoryModel, SetPriorityModel, SetRiskModel, StatueModel } from "../../models/SetStatuesModel/SetSatuesModel";
 import { SetStatueService } from "../../services/SetStatuesService/SetStatuesService";
+import { DecodedToken } from "../../models/jwt/jwt.model";
+import { jwtDecode } from "jwt-decode";
 
 
 export const DetailIncidentSupervisorVM=()=>{
@@ -25,6 +27,12 @@ export const DetailIncidentSupervisorVM=()=>{
     const [risk,setRisk]=useState<RiskModel[]>([])
     const [affectation,setAffectation]=useState<AffectationModel[]>([]);
     const [category,setCategory]=useState<CategoryModel[]>([]);
+    const [priority,setPriority]=useState<PriorityModel[]>([]);
+
+    const data = localStorage.getItem('UserData') ?? '';
+    const decodedToken = jwtDecode<DecodedToken>(data);
+    let valueToken = decodedToken.idUsuario;
+    
 
     //Statues
    
@@ -45,6 +53,10 @@ export const DetailIncidentSupervisorVM=()=>{
       const getCategory=async()=>{
         const data= await GetStatueService.fetchCategory();
         setCategory(data)
+      }
+      const getPriority=async()=>{
+        const data= await GetStatueService.fetchPriority();
+        setPriority(data)
       }
       const goToAsign=async()=>{
         history.push("./techAsignL")
@@ -102,9 +114,11 @@ export const DetailIncidentSupervisorVM=()=>{
       //Handles
       const handleStatue= async(value:StatueModel)=>{
         const statue: StatueModel = value;
+       
         try {
           await SetStatueService.setStatue(statue);
           console.log("Estado cambiado")
+          setDetails();
         } catch (error) {
           console.log(error)
         }
@@ -115,6 +129,15 @@ export const DetailIncidentSupervisorVM=()=>{
         try {
           await SetStatueService.setRisk(risk);
           console.log("Riesgo cambiado")
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      const handlePriority= async(value:SetPriorityModel)=>{
+        const priority: SetPriorityModel = value;
+        try {
+          await SetStatueService.setPriority(priority);
+          console.log("Prioridad cambiado")
         } catch (error) {
           console.log(error)
         }
@@ -176,7 +199,11 @@ const goToJustify=()=>{
         handleAffectation,
         handleCategory,
         goToJustify,
-        imagesData2
+        imagesData2,
+        valueToken,
+        handlePriority,
+        priority,setPriority,
+        getPriority
      
         
     }

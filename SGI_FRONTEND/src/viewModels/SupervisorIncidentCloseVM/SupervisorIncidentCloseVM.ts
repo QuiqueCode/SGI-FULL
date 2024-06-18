@@ -21,10 +21,23 @@ export const SupervisorIncidentCloseVM=()=>{
         history.push("/SupervisorIncidentDetail")
         localStorage.setItem('idIncident',id)
       }
+
+      const [searchTerm, setSearchTerm] = useState('');
+
+      // Función para manejar cambios en el IonSearchbar
+      const handleSearchChange = (e:any) => {
+        setSearchTerm(e.target.value);
+      };
+      const filteredData = incidentL.filter(incident =>
+        incident.CT_CODIGO_INCIDENCIA.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     return {
         getIncidents,
         incidentL,
         goToMenu,
-        goToDetail
+        goToDetail,
+        searchTerm,
+        handleSearchChange,
+        filteredData
     }
 }

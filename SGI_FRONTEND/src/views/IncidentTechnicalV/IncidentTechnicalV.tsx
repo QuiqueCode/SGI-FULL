@@ -50,7 +50,8 @@ export const IncidentTechnicalV = () => {
     uploadImage,
     openCamera,
     images,
-    saveImages
+    saveImages,
+    valueToken
   } = IncidentTechnicalVM();
 
   useEffect(() => {
@@ -101,7 +102,7 @@ export const IncidentTechnicalV = () => {
               <IonSelect
                 aria-label="Statue"
                 placeholder="Seleccionar estado"
-                onIonChange={(e) =>  handleStatue({CN_ID_ESTADOF:e.detail.value,CT_CODIGO_INCIDENCIA:localStorage.getItem('idIncident')||''})}
+                onIonChange={(e) =>  handleStatue({CN_ID_ESTADOF:e.detail.value,CT_CODIGO_INCIDENCIA:localStorage.getItem('idIncident')||'',CT_CEDULA_USUARIO:valueToken,CN_ESTADO_ACTUAL:detail?.CN_ID_ESTADOF||0})}
                 value={detail?.CN_ID_ESTADOF}
                 onIonCancel={() => console.log("ionCancel fired")}
                 onIonDismiss={() => console.log("ionDismiss fired")}

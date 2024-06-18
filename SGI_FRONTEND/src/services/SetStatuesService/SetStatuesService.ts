@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SetAffectationModel, SetCategoryModel, SetRiskModel, StatueModel } from "../../models/SetStatuesModel/SetSatuesModel";
+import { SetAffectationModel, SetCategoryModel, SetPriorityModel, SetRiskModel, StatueModel } from "../../models/SetStatuesModel/SetSatuesModel";
 
 export class SetStatueService {
     
@@ -8,6 +8,22 @@ export class SetStatueService {
         const response = await axios.post(
           "http://localhost:3000/api/uStatue",
           statue
+        );
+        
+        return response.data;
+      } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+          throw new Error(error.response?.data?.error || "Error");
+        } else {
+          throw new Error("Error");
+        }
+      }
+    }
+    static async setPriority(risk: SetPriorityModel) {
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/api/uPriority",
+          risk
         );
         
         return response.data;

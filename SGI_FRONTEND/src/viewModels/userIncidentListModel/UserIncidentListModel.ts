@@ -18,6 +18,16 @@ export const UserIncidentListVM = () => {
   };
   //Recordar que es el id del incidente.
 
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Función para manejar cambios en el IonSearchbar
+  const handleSearchChange = (e:any) => {
+    setSearchTerm(e.target.value);
+  };
+  const filteredData = data.filter(incident =>
+    incident.CT_CODIGO_INCIDENCIA.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const fetchData = async () => {
     try {
       const datos = await UserIncidentListService.fetchIncidents();
@@ -42,7 +52,9 @@ export const UserIncidentListVM = () => {
     error,
     backToMenu,
     goTocreate,
-    fetchData
+    fetchData,
+    searchTerm,filteredData,
+    handleSearchChange
   };
 };
 

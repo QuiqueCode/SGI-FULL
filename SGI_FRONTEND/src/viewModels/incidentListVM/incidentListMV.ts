@@ -13,6 +13,17 @@ export const IncidentListMV=()=>{
   const [data, setData] = useState<IncidentListModel[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+
+// Función para manejar cambios en el IonSearchbar
+const handleSearchChange = (e:any) => {
+  setSearchTerm(e.target.value);
+};
+const filteredData = data.filter(incident =>
+  incident.CT_CODIGO_INCIDENCIA.toLowerCase().includes(searchTerm.toLowerCase())
+);
+
+
 
   const history=useHistory();
 
@@ -47,7 +58,7 @@ export const IncidentListMV=()=>{
 
 
   return{
-    data,setData,setLoading,setError,loading,error, backToMenu, fetchData,goToDetail,goToReport
+    data,setData,setLoading,setError,loading,error, backToMenu, fetchData,goToDetail,goToReport,searchTerm,handleSearchChange,filteredData
   }
 }
 

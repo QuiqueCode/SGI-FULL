@@ -14,6 +14,8 @@ import { DiagnosisIncidentListService, IncidentTechnicianListService } from "../
 import { CostModel } from "../../models/CostModel/CostModel";
 import { send, sync } from "ionicons/icons";
 import { CostService } from "../../services/CostService/CostService";
+import { jwtDecode } from "jwt-decode";
+import { DecodedToken } from "../../models/jwt/jwt.model";
 
 export const SuperVisorDetailVM = () => {
     const [presentT] = useIonToast();
@@ -30,6 +32,10 @@ export const SuperVisorDetailVM = () => {
       CD_COSTO:0,
       CT_CODIGO_INCIDENCIA:localStorage.getItem('idIncident')||''
     })
+    const userData= localStorage.getItem('UserData') ?? '';
+    const decodedToken = jwtDecode<DecodedToken>(userData);
+    let valueToken = decodedToken.idUsuario;
+    
     const [present, dismiss] = useIonLoading();
   
     //STATUES
@@ -121,6 +127,7 @@ export const SuperVisorDetailVM = () => {
       try {
         await SetStatueService.setStatue(statue);
         console.log("Estado cambiado")
+        setDetails();
       } catch (error) {
         console.log(error)
       }
@@ -209,7 +216,8 @@ export const SuperVisorDetailVM = () => {
       images,
       cost,
       handleInputChange,
-      sendCost
+      sendCost,
+      valueToken
      
   
     };

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router"
+import { DecodedToken } from "../../models/jwt/jwt.model";
+import { jwtDecode } from "jwt-decode";
 
 
 
@@ -12,6 +14,10 @@ export const RolSelectorActions=()=>{
         localStorage.clear();
     }
     const goToUser=()=>{
+        const dataUser = localStorage.getItem('UserData') ?? '';
+        const decodedToken = jwtDecode<DecodedToken>(dataUser);
+        let valueToken = decodedToken;
+        console.log(valueToken)
         history.push('/UserIncidentL')
     }
     const goToTech=()=>{

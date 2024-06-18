@@ -5,7 +5,9 @@ import { useEffect } from "react";
 
 export const UserIncidentList=()=>{
 
-  const {data,setData,setLoading,setError,loading,error, backToMenu,goTocreate,fetchData}= UserIncidentListVM();
+  const {data,setData,setLoading,setError,loading,error, backToMenu,goTocreate,fetchData ,handleSearchChange,
+    filteredData,
+    searchTerm}= UserIncidentListVM();
 
   useEffect(()=>{
 fetchData();
@@ -23,10 +25,11 @@ fetchData();
    <div className="headerContainer">
    <IonButton className="createButton" onClick={goTocreate}>Crear incidencia</IonButton> <br />
    
-   <IonSearchbar className="custom-searchbar" placeholder="2024-00001"></IonSearchbar> <br />
+   <IonSearchbar       value={searchTerm}
+         onIonChange={handleSearchChange} className="custom-searchbar" placeholder="2024-00001"></IonSearchbar> <br />
    
    </div>
- {data.map((incident,index)=>(
+ {filteredData.map((incident,index)=>(
 
 
 <IonList inset={true} key={index}>
@@ -34,7 +37,7 @@ fetchData();
   <div className="unread-indicator-wrapper" slot="start">
   </div>
   <IonLabel>
-  {"Incidencia: "+ incident.CT_TITULO_INCIDENCIA}
+  {"Incidencia: "+ incident.CT_CODIGO_INCIDENCIA}
   <br />
 
     <IonNote color="medium" className="ion-text-wrap">

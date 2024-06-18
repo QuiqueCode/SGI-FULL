@@ -18,12 +18,29 @@ import {
   IonList,
 } from "@ionic/react";
 import "./IncidentListStyle.css";
-import { IonSearchbar } from '@ionic/react';
-import { IncidentListMV, getIncidentDataList } from "../../viewModels/incidentListVM/incidentListMV";
+import { IonSearchbar } from "@ionic/react";
+import {
+  IncidentListMV,
+  getIncidentDataList,
+} from "../../viewModels/incidentListVM/incidentListMV";
 import { chevronForward } from "ionicons/icons";
 
 const IncidentList: React.FC = () => {
-const { data,setData,setLoading,setError,loading,error, backToMenu,fetchData,goToDetail,goToReport}=IncidentListMV();
+  const {
+    data,
+    setData,
+    setLoading,
+    setError,
+    loading,
+    error,
+    backToMenu,
+    fetchData,
+    goToDetail,
+    goToReport,
+    searchTerm,
+    handleSearchChange,
+    filteredData,
+  } = IncidentListMV();
 
   useEffect(() => {
     fetchData();
@@ -39,41 +56,55 @@ const { data,setData,setLoading,setError,loading,error, backToMenu,fetchData,goT
 
   return (
     <IonContent fullscreen>
-           <div className="backContainer">
-          <p onClick={backToMenu}>ATRÁS</p> 
-        </div>
-        <div className="titleContainer">
-        <h1 style={{color:'#C0C0C0'}}>Lista de incidencia</h1>
-        </div>
-<div className="reportContainer">
-<IonButton className="reportButton" onClick={()=>{goToReport()}}>Reportes</IonButton> <br />
-</div>
-   
-      <div className="bodyContainerBar">
-
-      <IonSearchbar className="custom-searchbar" placeholder="2024-00001"></IonSearchbar> <br />
-      
+      <div className="backContainer">
+        <p onClick={backToMenu}>ATRÁS</p>
       </div>
-        {data.map((incident) => (
+      <div className="titleContainer">
+        <h1 style={{ color: "#C0C0C0" }}>Lista de incidencia</h1>
+      </div>
+      <div className="reportContainer">
+        <IonButton
+          className="reportButton"
+          onClick={() => {
+            goToReport();
+          }}
+        >
+          Reportes
+        </IonButton>{" "}
+        <br />
+      </div>
 
-          
-           <IonList inset={true}>
-           <IonItem  detail={false}>
-          
-             <IonLabel>
-             {"Incidencia: " + incident.CT_CODIGO_INCIDENCIA}
-             <br />
+      <div className="bodyContainerBar">
+        <IonSearchbar
+          value={searchTerm}
+          onIonChange={handleSearchChange}
+          className="custom-searchbar"
+          placeholder="2024-00001"
+        ></IonSearchbar>{" "}
+        <br />
+      </div>
+      {filteredData.map((incident) => (
+        <IonList inset={true}>
+          <IonItem detail={false}>
+            <IonLabel>
+              {"Incidencia: " + incident.CT_CODIGO_INCIDENCIA}
+              <br />
 
-               <IonNote color="medium" className="ion-text-wrap">
-               {"Descripción: "+incident.CT_DESCRIPCION_INCIDENCIA}
-               </IonNote>
-             </IonLabel>
-             <IonButton className="inItem" onClick={()=>{goToDetail(incident.CT_CODIGO_INCIDENCIA)}}>Ingresar</IonButton>
-        
-           </IonItem>
-          
-         </IonList>
-        ))}
+              <IonNote color="medium" className="ion-text-wrap">
+                {"Descripción: " + incident.CT_DESCRIPCION_INCIDENCIA}
+              </IonNote>
+            </IonLabel>
+            <IonButton
+              className="inItem"
+              onClick={() => {
+                goToDetail(incident.CT_CODIGO_INCIDENCIA);
+              }}
+            >
+              Ingresar
+            </IonButton>
+          </IonItem>
+        </IonList>
+      ))}
     </IonContent>
   );
 };

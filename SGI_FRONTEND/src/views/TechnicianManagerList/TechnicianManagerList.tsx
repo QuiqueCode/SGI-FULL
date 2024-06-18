@@ -11,10 +11,12 @@ import { AsignableUserVM } from "../../viewModels/AsignableUserVM/AsignableUserV
 import { useEffect } from "react";
 
 export function TechnicianManagerList() {
-  const { getUserList, asignableUser,goBack,techAsign  } = AsignableUserVM();
+  const { getUserList, asignableUser,goBack,techAsign, setDetails  } = AsignableUserVM();
 
   useEffect(()=>{
+    setDetails();
     getUserList();
+    
   },[])
 
   return (

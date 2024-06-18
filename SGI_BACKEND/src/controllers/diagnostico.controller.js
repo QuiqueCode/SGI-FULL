@@ -1,3 +1,4 @@
+import { BitacoraGenral } from "../models/BitacoraGeneral.js";
 import { Diagnostico } from "../models/Diagnostico.js";
 import { Incidencia } from "../models/Incidencia.js";
 import { IncidenciaXDiagnostico } from "../models/Incidencia_diagnostico.js";
@@ -11,7 +12,7 @@ export const createDiagnosis = async (req, res) => {
             CT_DIAGNOSTICO,
             CT_OBSERVACIONES,
             CT_TECNICO,
-            CB_REQUIERE_COMPRA
+            CB_REQUIERE_COMPRA,
           } = req.body;
 
          const nuevoDiagnostico= await Diagnostico.create({
@@ -34,7 +35,14 @@ export const createDiagnosis = async (req, res) => {
               },
             },
           );
-
+          const reportData={
+            CT_CEDULA_USUARIO_R:CT_TECNICO,
+            CT_CODIGO_PANTALLA_R:2,
+            CT_SISTEMA:'SGI',
+            CT_REFERENCIA:`Numero de incidencia: ${CT_ID_INCIDENCIA} - Tiempo solución estimado = ${CN_TIEMPO_SOLUCION_ESTIMADO}h`
+          }
+          await BitacoraGenral.create(reportData)
+        console.log(reportData)
         return res.status(201).json({msg:'Diagnostico creado con exito'});
     } catch (error) {
         return res.status(500).json({ error: error.message });

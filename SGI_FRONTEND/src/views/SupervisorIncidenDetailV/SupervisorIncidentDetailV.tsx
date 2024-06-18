@@ -36,6 +36,7 @@ export default function SupervisorIncidentDetailV() {
     cost,
     handleInputChange,
     sendCost,
+    valueToken
   } = SuperVisorDetailVM();
   useEffect(() => {
     setDetails();
@@ -86,11 +87,7 @@ export default function SupervisorIncidentDetailV() {
                 aria-label="Statue"
                 placeholder="Seleccionar estado"
                 onIonChange={(e) =>
-                  handleStatue({
-                    CN_ID_ESTADOF: e.detail.value,
-                    CT_CODIGO_INCIDENCIA:
-                      localStorage.getItem("idIncident") || "",
-                  })
+                  handleStatue({CN_ID_ESTADOF:e.detail.value,CT_CODIGO_INCIDENCIA:localStorage.getItem('idIncident')||'',CT_CEDULA_USUARIO:valueToken,CN_ESTADO_ACTUAL:detail?.CN_ID_ESTADOF||0})
                 }
                 value={detail?.CN_ID_ESTADOF}
                 onIonCancel={() => console.log("ionCancel fired")}

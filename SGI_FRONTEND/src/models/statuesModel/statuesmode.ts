@@ -17,3 +17,7 @@ export interface CategoryModel{
     CN_ID_CATEGORIA:number,
 	CT_DESCRIPCION:string
 }
+export interface PriorityModel{
+    CN_ID_PRIORIDAD:number,
+	CT_DESCRIPCION:string
+}

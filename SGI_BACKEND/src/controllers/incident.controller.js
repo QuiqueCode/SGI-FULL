@@ -5,6 +5,8 @@ import { Estados } from "../models/Estados.js";
 import { Incidencia } from "../models/Incidencia.js";
 import { Usuarios } from "../models/Usuarios.js";
 import { Imagenes } from "../models/Imagenes.js";
+import { BitacoraEstados } from "../models/BitcaoraEstado.js";
+import { BitacoraGenral } from "../models/BitacoraGeneral.js";
 
 
 
@@ -57,7 +59,31 @@ export const createIncident = async (req, res) => {
     };
     console.log(datos);
 
+    const data={
+      CT_CODIGO_INCIDENCIA_R:CT_CODIGO_INCIDENCIA,
+      CN_ESTADO_ACTUAL:null,
+      CN_ESTADO_NUEVO:CN_ID_ESTADOF,
+      CT_CEDULA_USUARIO_CREADOR
+    }
+
+
+
     await Incidencia.create(datos);
+    await BitacoraEstados.create(data);
+    const date = await Incidencia.findOne({
+      attributes:['CF_FECHA_HORA_REGISTRO'],
+      where:{
+        CT_CODIGO_INCIDENCIA
+      }
+    });
+
+    const reportData={
+      CT_CEDULA_USUARIO_R:CT_CEDULA_USUARIO_CREADOR,
+      CT_CODIGO_PANTALLA_R:1,
+      CT_SISTEMA:"SGI",
+      CT_REFERENCIA:`Número de incidencia: ${CT_CODIGO_INCIDENCIA} - Usuario que crea: ${CT_CEDULA_USUARIO_CREADOR} - Fecha de creación: ${date.CF_FECHA_HORA_REGISTRO}`
+    }
+    await BitacoraGenral.create(reportData)
     return res.status(201).json({ msg: "Incidencia creada con exito" });
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -293,6 +319,7 @@ export const getIncidentData = async (req, res) => {
 export const technicianAsign= async(req,res)=>{
   try {
   const {CT_CEDULA_USUARIO_R,CT_CODIGO_INCIDENCIA_R}=req.query
+  const {AFECTACION,PRIORIDAD,RIESGO}=req.body
 
   await UsuarioxIncidenciaAsignacion.create({CT_CEDULA_USUARIO_R,CT_CODIGO_INCIDENCIA_R})
   await Incidencia.update(
@@ -303,6 +330,13 @@ export const technicianAsign= async(req,res)=>{
       },
     },
   );
+  const reportData={
+    CT_CEDULA_USUARIO_R:CT_CEDULA_USUARIO_R,
+    CT_CODIGO_PANTALLA_R:3,
+    CT_SISTEMA:'SGI',
+    CT_REFERENCIA:`Numero de incidencia: ${CT_CODIGO_INCIDENCIA_R} - Código técnico = ${CT_CEDULA_USUARIO_R} - Afectación= ${AFECTACION} - Prioridad= ${PRIORIDAD} - Riesgo= ${RIESGO}`
+  }
+  await BitacoraGenral.create(reportData)
   res.status(200).json({ msg: "Asignacion Realizada" });
   } catch (error) {
     console.error("Error al asignar:", error);

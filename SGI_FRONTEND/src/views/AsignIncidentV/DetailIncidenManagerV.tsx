@@ -31,7 +31,11 @@ export function DetailIncidentManagerV(){
   handleAffectation,
   handleCategory,
   goToJustify,
-  imagesData2
+  imagesData2,
+  valueToken,
+  handlePriority,
+  priority,
+  getPriority
 
 }= DetailIncidentSupervisorVM();
 
@@ -40,9 +44,11 @@ export function DetailIncidentManagerV(){
       sendDiagnosis();
       chargeImages();
       getStatues();
+      getPriority();
       getRisk();
       getCategory();
       getAffectation();
+
       
       
     }, []);
@@ -72,6 +78,8 @@ export function DetailIncidentManagerV(){
                 formatDateTime(detail?.CF_FECHA_HORA_REGISTRO || "")}
               </span>
             </div>
+            
+            
             {/**
                <div className="icon-text">
               <IonIcon icon={person} className="icon" />
@@ -89,7 +97,7 @@ export function DetailIncidentManagerV(){
     aria-label="Statue"
     placeholder="Seleccionar estado"
     onIonChange={(e) =>
-      handleStatue({CN_ID_ESTADOF:e.detail.value,CT_CODIGO_INCIDENCIA:localStorage.getItem('idIncident')||''})
+      handleStatue({CN_ID_ESTADOF:e.detail.value,CT_CODIGO_INCIDENCIA:localStorage.getItem('idIncident')||'',CT_CEDULA_USUARIO:valueToken,CN_ESTADO_ACTUAL:detail?.CN_ID_ESTADOF||0})
     }
     value={detail?.CN_ID_ESTADOF}
     onIonCancel={() => console.log("ionCancel fired")}
@@ -105,6 +113,7 @@ export function DetailIncidentManagerV(){
   </IonSelect>
   
               </div>
+              
             </div>
             <div className="icon-text">
               <IonIcon icon={shield} className="icon" />
@@ -125,6 +134,31 @@ export function DetailIncidentManagerV(){
    {risk.map((data,index)=>(
 
 <IonSelectOption key={index} value={data.CN_ID_RIESGO}>{data.CT_DESCRIPCION}</IonSelectOption>
+
+  ))}
+  </IonSelect>
+  
+              </div>
+            </div>
+            <div className="icon-text">
+              <IonIcon icon={shield} className="icon" />
+              <span style={{ marginRight: "15px" }}>{"Prioridad:"}</span>
+              <div>
+              <IonSelect
+    aria-label="Statue"
+    placeholder="Seleccionar prioridad"
+    value={detail?.CN_PRIORIDAD}
+    onIonChange={(e) =>
+      handlePriority({CN_PRIORIDAD:e.detail.value,CT_CODIGO_INCIDENCIA:localStorage.getItem('idIncident')||''})
+    }
+    
+    onIonCancel={() => console.log("ionCancel fired")}
+    onIonDismiss={() => console.log("ionDismiss fired")}
+    className="customSelec"
+  >
+   {priority.map((data,index)=>(
+
+<IonSelectOption key={index} value={data.CN_ID_PRIORIDAD}>{data.CT_DESCRIPCION}</IonSelectOption>
 
   ))}
   </IonSelect>

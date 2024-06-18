@@ -2,7 +2,8 @@ import { jwtDecode } from "jwt-decode";
 
 //FALTAN LOS ROLES
 export interface DecodedToken {
-    idUsuario:string
+    idUsuario:string,
+    roles:[]
 }
 
 /*

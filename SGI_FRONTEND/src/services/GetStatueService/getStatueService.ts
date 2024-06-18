@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AffectationModel, CategoryModel, RiskModel, StatuesModel } from "../../models/statuesModel/statuesmode";
+import { AffectationModel, CategoryModel, PriorityModel, RiskModel, StatuesModel } from "../../models/statuesModel/statuesmode";
 
 export class GetStatueService {
     static async fetchStatues(): Promise<StatuesModel[]> {
@@ -58,6 +58,16 @@ export class GetStatueService {
             const dataUser = localStorage.getItem('UserData') ?? '';
             const response = await fetch(`http://localhost:3000/api/gCategory`);
             const data: CategoryModel[] = await response.json();
+            return data;
+        } catch (error) {
+            throw new Error('Error al obtener los estados');
+        }
+    }
+    static async fetchPriority(): Promise<PriorityModel[]> {
+        try {
+            const dataUser = localStorage.getItem('UserData') ?? '';
+            const response = await fetch(`http://localhost:3000/api/gPriority`);
+            const data: PriorityModel[] = await response.json();
             return data;
         } catch (error) {
             throw new Error('Error al obtener los estados');

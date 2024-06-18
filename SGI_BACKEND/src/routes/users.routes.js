@@ -4,7 +4,7 @@ import { createIncident, getImages, getIncident, getIncidentData, getIncidentUse
 import { createDiagnosis, getDiagnosis } from "../controllers/diagnostico.controller.js";
 import multer from "multer";
 import { storage } from "./midleware.js";
-import { getAffectation, getCategory, getRisk, getStatue, getSupervisorStatue, getTechStatue, updateAffectation, updateCategory, updateRisk, updateStatue } from "../controllers/statues.controller.js";
+import { getAffectation, getCategory, getPriority, getRisk, getStatue, getSupervisorStatue, getTechStatue, updateAffectation, updateCategory, updatePriority, updateRisk, updateStatue } from "../controllers/statues.controller.js";
 import { workReport } from "../controllers/report.controller.js";
 
 
@@ -43,6 +43,7 @@ router.get('/gSupervisorStatue',getSupervisorStatue);
 router.get('/gRisk',getRisk);
 router.get('/gAffectation',getAffectation);
 router.get('/gCategory',getCategory);
+router.get('/gPriority',getPriority);
 
 //Obtener usuarios
 router.get('/gAsignUsers',getAsignUsers);
@@ -53,6 +54,7 @@ router.post('/uStatue',updateStatue);
 router.post('/uRisk',updateRisk);
 router.post('/uAffectation',updateAffectation);
 router.post('/uCategory',updateCategory);
+router.post('/uPriority',updatePriority);
 
 //Reportes
 router.get('/gWorkR',workReport);

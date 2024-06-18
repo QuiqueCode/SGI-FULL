@@ -7,18 +7,7 @@ import { useIonLoading } from '@ionic/react';
 import { LoginViewModel } from '../../viewModels/loginViewModel/loginViewModel';
 
 
-const consulta = async (form: object, present: any) => {
-  try {
-    await axios.post('http://localhost:3000/login', form);
-    console.log("Inicio de sesión exitoso");
-    present({
-      message: "Iniciando sesion...",
-      duration: 1500,
-    });
-  } catch (error) {
-    console.error('Error al enviar la solicitud:', error);
-  }
-};
+
 
 const Login: React.FC = () => {
   const {present,formData,handleInputChange,handleSubmit}=LoginViewModel()

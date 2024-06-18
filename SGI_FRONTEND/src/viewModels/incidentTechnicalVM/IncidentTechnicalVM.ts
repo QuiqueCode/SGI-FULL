@@ -15,6 +15,8 @@ import { image } from "ionicons/icons";
 import { useIonLoading, useIonToast } from "@ionic/react";
 import { StatueModel } from "../../models/SetStatuesModel/SetSatuesModel";
 import { SetStatueService } from "../../services/SetStatuesService/SetStatuesService";
+import { DecodedToken } from "../../models/jwt/jwt.model";
+import { jwtDecode } from "jwt-decode";
 
 export const IncidentTechnicalVM = () => {
   const [presentT] = useIonToast();
@@ -29,11 +31,25 @@ export const IncidentTechnicalVM = () => {
   const history = useHistory();
   const [present, dismiss] = useIonLoading();
 
+  const userData= localStorage.getItem('UserData') ?? '';
+  const decodedToken = jwtDecode<DecodedToken>(userData);
+  let valueToken = decodedToken.idUsuario;
+  
   //STATUES
   const [statueChange,setStatueChange]=useState({
     CN_ID_ESTADOF:0,
     CT_CODIGO_INCIDENCIA:localStorage.getItem('idIncident')
   });
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Función para manejar cambios en el IonSearchbar
+  const handleSearchChange = (e:any) => {
+    setSearchTerm(e.target.value);
+  };
+  const filteredData = data.filter(incident =>
+    incident.CT_CODIGO_INCIDENCIA.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
 
   const [images, setImages] = useState<string[]>([]);
 
@@ -169,6 +185,7 @@ export const IncidentTechnicalVM = () => {
     try {
       await SetStatueService.setStatue(statue);
       console.log("Estado cambiado")
+      setDetails();
     } catch (error) {
       console.log(error)
     }
@@ -223,7 +240,11 @@ export const IncidentTechnicalVM = () => {
     uploadImage,
     openCamera,
     images,
-    saveImages
+    saveImages,
+    valueToken,
+    handleSearchChange,
+    filteredData,
+    searchTerm
   };
 };
 

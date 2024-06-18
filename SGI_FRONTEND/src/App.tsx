@@ -1,4 +1,4 @@
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
@@ -47,48 +47,34 @@ import WorkReportV from './views/WorkReportV/WorkReportV';
 import ReportSelectorV from './views/ReportSelectorV/ReportSelectorV';
 import SupervisorIncidentCloseV from './views/SupervisorIncidentCloseV/SupervisorIncidentCloseV';
 import SupervisorIncidentDetailV from './views/SupervisorIncidenDetailV/SupervisorIncidentDetailV';
+import { AuthProvider } from './Auth/AuthContext';
+import ProtectedRoute from './Auth/SaveRoute';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
-     
-   
-     
-      <IonRouterOutlet>
-        <Route path="/login" component={Login} exact />
-        <Route path="/Cincident" component={CIncident} exact />
-        <Route path="/RolSelector" component={RolSelector} exact/>
-        <Route path="/UserIncidentL" component={UserIncidentList} exact/>
-        <Route path="/diagnostic" component={CDiagnosis} exact />
-
-        <Route path="/incidentManagerList" component={IncidentList} exact />
-        <Route path="/managerDetail" component={DetailIncidentManagerV} exact />
-
-        <Route path="/TechIncidentDetail" component={IncidentTechnicalV} exact />
-        <Route path="/TechIncidentsList" component={TechnicalIncidentList} exact />
-
-       
-        <Route path="/techAsignL" component={TechnicianManagerList} exact />
-        <Route path="/justifyClousure" component={JustifyClousure} exact />
-        <Route path="/workReport" component={WorkReportV} exact />
-        <Route path="/reportSelector" component={ReportSelectorV} exact />
-        <Route path="/SupervisorCloseList" component={SupervisorIncidentCloseV} exact />
-        <Route path="/SupervisorIncidentDetail" component={SupervisorIncidentDetailV} exact />
-
-        <Redirect exact from="/" to="/login" />
-      </IonRouterOutlet>
-     
-    
-
-
-
-
-      
-
-    </IonReactRouter>
-  </IonApp>
+  <IonReactRouter>
+    <Switch>
+      <Route path="/login" component={Login} exact />
+      <ProtectedRoute path="/RolSelector" component={RolSelector} exact roles={[1, 2, 3, 4, 5]} />
+      <ProtectedRoute path="/UserIncidentL" component={UserIncidentList} exact roles={[2]} />
+      <ProtectedRoute path="/Cincident" component={CIncident} exact roles={[2]} />
+      <ProtectedRoute path="/incidentManagerList" component={IncidentList} exact roles={[3]} />
+      <ProtectedRoute path="/reportSelector" component={ReportSelectorV} exact roles={[3]} />
+      <ProtectedRoute path="/workReport" component={WorkReportV} exact roles={[3]} />
+      <ProtectedRoute path="/managerDetail" component={DetailIncidentManagerV} exact roles={[3]} />
+      <ProtectedRoute path="/techAsignL" component={TechnicianManagerList} exact roles={[3]} />
+      <ProtectedRoute path="/justifyClousure" component={JustifyClousure} exact roles={[3]} />
+      <ProtectedRoute path="/TechIncidentsList" component={TechnicalIncidentList} exact roles={[4]} />
+      <ProtectedRoute path="/TechIncidentDetail" component={IncidentTechnicalV} exact roles={[4]} />
+      <ProtectedRoute path="/diagnostic" component={CDiagnosis} exact roles={[4]} />
+      <ProtectedRoute path="/SupervisorCloseList" component={SupervisorIncidentCloseV} exact roles={[5]} />
+      <ProtectedRoute path="/SupervisorIncidentDetail" component={SupervisorIncidentDetailV} exact roles={[5]} />
+      <Redirect exact from="/" to="/login" />
+    </Switch>
+  </IonReactRouter>
+</IonApp>
 );
 
 export default App;
