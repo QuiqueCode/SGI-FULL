@@ -5,7 +5,7 @@ import { ReportSelector } from '../../viewModels/ReportSelectorVM/ReportSelector
 
 export default function ReportSelectorV() {
 
-    const {goBack,goToWorkReport}=ReportSelector()
+    const {goBack,goToWorkReport,  goToBinnacleReport,goToWorkReport2}=ReportSelector()
   return (
   
     <>
@@ -15,9 +15,9 @@ export default function ReportSelectorV() {
      </div>
    <div className="bodyContainer2">
     
-     <IonButton className="rolSelector" >Reporte de trabajos</IonButton> 
+     <IonButton className="rolSelector" onClick={()=>{goToWorkReport2()}} >Reporte de trabajos</IonButton> 
      <IonButton className="rolSelector" onClick={()=>{goToWorkReport()}} >Reporte cargas de trabajo</IonButton> 
-     <IonButton className="rolSelector" >Reporte de bitácoras</IonButton> 
+     <IonButton className="rolSelector" onClick={()=>{goToBinnacleReport()}}>Reporte de bitácoras</IonButton> 
 
     
    </div>

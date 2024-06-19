@@ -18,6 +18,7 @@ export const RolSelector = () => {
     handleAction,
     setProgress,
     setIsLoading,
+    goToAdmin
   } = RolSelectorActions();
 
   useEffect(() => {
@@ -76,7 +77,7 @@ export const RolSelector = () => {
         >
           Supervisor
         </IonButton>
-        <IonButton className="rolSelector">Administrador</IonButton>
+        <IonButton className="rolSelector"  onClick={() => handleButtonClick(goToAdmin)}>Administrador</IonButton>
       </div>
     </>
   );

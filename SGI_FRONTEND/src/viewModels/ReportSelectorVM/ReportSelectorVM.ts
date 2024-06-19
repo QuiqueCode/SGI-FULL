@@ -8,9 +8,17 @@ export const ReportSelector=()=>{
     const goToWorkReport=()=>{
         history.push('/workReport')
     }
+    const goToWorkReport2=()=>{
+        history.push('/workReport2')
+    }
+    const goToBinnacleReport=()=>{
+        history.push('/binnacleReport')
+    }
 
     return{
         goBack,
-        goToWorkReport
+        goToWorkReport,
+        goToBinnacleReport,
+        goToWorkReport2
     }
 }

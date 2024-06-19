@@ -1,0 +1,36 @@
+.desactivateUser{
+    width: 100px;
+    height: 30px;
+    padding-left: 16px;
+    --background: #2d830b;
+    --background-hover: #267307;
+    --background-activated: #215f09;
+    --background-focused: #2d830b;
+    
+    
+  
+    --color: rgb(255, 255, 255);
+  
+    --border-radius: 10px;
+    --border-color: #2d830b;
+    --border-style: solid;
+    --border-width: 1px;
+  }
+  .desactivateUser2{
+    width: 100px;
+    height: 30px;
+    padding-left: 16px;
+    --background: #c90000;
+    --background-hover: #c90000;
+    --background-activated: #a30606;
+    --background-focused: #c90000;
+    
+    
+  
+    --color: rgb(255, 255, 255);
+  
+    --border-radius: 10px;
+    --border-color: #c90000;
+    --border-style: solid;
+    --border-width: 1px;
+  }

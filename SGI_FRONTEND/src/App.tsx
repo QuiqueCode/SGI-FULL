@@ -49,11 +49,20 @@ import SupervisorIncidentCloseV from './views/SupervisorIncidentCloseV/Superviso
 import SupervisorIncidentDetailV from './views/SupervisorIncidenDetailV/SupervisorIncidentDetailV';
 import { AuthProvider } from './Auth/AuthContext';
 import ProtectedRoute from './Auth/SaveRoute';
+import BinnacleReportV from './views/BinnacleReportV/BinnacleReportV';
+import ReportWork2V from './views/ReportWork2V/ReportWork2V';
+import AdminSelectorV from './views/AdminSelectorV/AdminSelectorV';
+import RegisterUserV from './views/RegisterUserV/RegisterUserV';
+import RolAministrationV from './views/RolAministrationV/RolAministrationV';
+import UserAdminV from './views/UserAdminV/UserAdminV';
+import EditUserV from './views/EditUserV/EditUserV';
+
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
+  
   <IonReactRouter>
     <Switch>
       <Route path="/login" component={Login} exact />
@@ -71,10 +80,22 @@ const App: React.FC = () => (
       <ProtectedRoute path="/diagnostic" component={CDiagnosis} exact roles={[4]} />
       <ProtectedRoute path="/SupervisorCloseList" component={SupervisorIncidentCloseV} exact roles={[5]} />
       <ProtectedRoute path="/SupervisorIncidentDetail" component={SupervisorIncidentDetailV} exact roles={[5]} />
+      <ProtectedRoute path="/binnacleReport" component={BinnacleReportV} exact roles={[3]} />
+      <ProtectedRoute path="/workReport2" component={ReportWork2V} exact roles={[3]} />
+      <ProtectedRoute path="/adminView" component={AdminSelectorV} exact roles={[1]} />
+      <ProtectedRoute path="/registerUserV" component={RegisterUserV} exact roles={[1]} />
+      <ProtectedRoute path="/rolAdministration" component={RolAministrationV} exact roles={[1]} />
+      <ProtectedRoute path="/usrAdminV" component={UserAdminV} exact roles={[1]} />
+      <ProtectedRoute path="/editUsr" component={EditUserV} exact roles={[1]} />
+
       <Redirect exact from="/" to="/login" />
     </Switch>
   </IonReactRouter>
+
+
+ 
 </IonApp>
+
 );
 
 export default App;

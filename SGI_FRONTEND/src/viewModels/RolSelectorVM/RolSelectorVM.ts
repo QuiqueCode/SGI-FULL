@@ -13,6 +13,9 @@ export const RolSelectorActions=()=>{
         history.push("/login");
         localStorage.clear();
     }
+    const goToAdmin=()=>{
+        history.push('/adminView')
+    }
     const goToUser=()=>{
         const dataUser = localStorage.getItem('UserData') ?? '';
         const decodedToken = jwtDecode<DecodedToken>(dataUser);
@@ -60,6 +63,7 @@ export const RolSelectorActions=()=>{
         handleAction,
         setProgress,
         setIsLoading,
+        goToAdmin
         
     }
 }

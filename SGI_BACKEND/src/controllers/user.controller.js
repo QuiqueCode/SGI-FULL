@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { Usuarios } from "../models/Usuarios.js";
 import { UsuariosXroles } from "../models/UsuariosXRoles.js";
 import { Sequelize } from "sequelize";
+import { sequelize } from "../database/database.js";
 
 let tokenPass = "Riki";
 
@@ -102,4 +103,83 @@ export const getAsignUsers=async(req,res)=>{
   }
 
  
+}
+
+async function assignRoles(ROLES, CT_CEDULA) {
+  try {
+    for (const element of ROLES) {
+      let data = {
+        CT_CEDULA_USUARIO_R: CT_CEDULA,
+        CN_ID_ROL: element
+      };
+      await UsuariosXroles.create(data);
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const createUser=async(req,res)=>{
+
+  try {
+    const {CT_CEDULA,CT_NOMBRE,
+      CT_APELLIDO_UNO,CT_APELLIDO_DOS,CN_TELEFONO,
+      CT_CORREO,CT_PUESTO,CN_DEPARTAMENTO,CB_ESTADO,CT_CONTRASENA, ROLES}=req.body;
+      
+      const data={CT_CEDULA,CT_NOMBRE,
+      CT_APELLIDO_UNO,CT_APELLIDO_DOS,CN_TELEFONO,
+      CT_CORREO,CT_PUESTO,CN_DEPARTAMENTO,CB_ESTADO,CT_CONTRASENA};
+      await Usuarios.create(data);
+      assignRoles(ROLES, CT_CEDULA)
+     return res.status(201).json({msg:'Usuario creado con exito'});
+      
+    
+  } catch (error) {
+    return res.status(500).json({msg:"Error al crear usuario"})
+  }
+}
+
+
+
+export const getAllUsers=async(req,res)=>{
+try {
+  const data= await Usuarios.findAll({
+    attributes: [
+      'CT_CEDULA',
+      'CT_NOMBRE',
+      'CT_APELLIDO_UNO',
+      'CT_APELLIDO_DOS',
+      'CT_CORREO',
+      'CN_DEPARTAMENTO',
+      'CB_ESTADO',
+      'CT_PUESTO',
+      [
+        sequelize.literal('(SELECT CT_NOMBRE_DEPARTAMENTO FROM T_DEPARTAMENTOS WHERE T_DEPARTAMENTOS.CN_CODIGO_DEPARTAMENTO = T_USUARIOS.CN_DEPARTAMENTO)'),
+        'DESCRIPCION_DEPARTAMENTO'
+      ]
+    ],
+  });
+  
+  return res.status(200).json(data)
+} catch (error) {
+  return res.status(500).json({msg:"Erro al obtener usuarios"})
+}
+}
+
+export const suspendUser= async(req,res)=>{
+  try {
+  const {CT_CEDULA,CB_ESTADO}=req.body
+  await Usuarios.update(
+    {CB_ESTADO},
+    {
+      where:{
+        CT_CEDULA
+      }
+    }
+  )
+  return res.status(200).json({msg:"Usuario suspendido"})
+  } catch (error) {
+  return res.status(500).json({msg:"Error al suspende usuario"})
+    
+  }
 }
