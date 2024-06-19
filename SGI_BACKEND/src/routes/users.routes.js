@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createUser, getAllUsers, getAsignUsers, login, suspendUser } from "../controllers/user.controller.js";
+import { createUser, getAllUsers, getAsignUsers, getUser, login, suspendUser, updateUser } from "../controllers/user.controller.js";
 import { createIncident, getImages, getIncident, getIncidentData, getIncidentUser, getSupervisorIncident, getTechnicianIncident, jusitfyClousure, sendFirstImages, sendLastImages, setCost, technicianAsign } from "../controllers/incident.controller.js";
 import { createDiagnosis, getDiagnosis } from "../controllers/diagnostico.controller.js";
 import multer from "multer";
@@ -51,6 +51,8 @@ router.get('/gPriority',getPriority);
 router.get('/gAsignUsers',getAsignUsers);
 router.get('/getAllUsr',getAllUsers)
 router.post('/suspendUsr',suspendUser)
+router.get('/gUser',getUser)
+router.patch('/uUser',updateUser)
 
 
 //Actualizar estados

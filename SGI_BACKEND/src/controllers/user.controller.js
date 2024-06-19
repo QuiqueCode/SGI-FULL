@@ -183,3 +183,92 @@ export const suspendUser= async(req,res)=>{
     
   }
 }
+
+export const getUser = async (req, res) => {
+  try {
+    const { CT_CEDULA } = req.query;
+    const data = await Usuarios.findAll({
+      attributes: [
+        'CT_CEDULA',
+        'CT_NOMBRE',
+        'CT_APELLIDO_UNO',
+        'CT_APELLIDO_DOS',
+        'CT_CORREO',
+        'CN_DEPARTAMENTO',
+        'CB_ESTADO',
+        'CT_CONTRASENA',
+        'CT_PUESTO',
+        'CN_TELEFONO',
+        [
+          sequelize.literal(`(
+            SELECT CT_NOMBRE_DEPARTAMENTO
+            FROM T_DEPARTAMENTOS
+            WHERE T_DEPARTAMENTOS.CN_CODIGO_DEPARTAMENTO = T_USUARIOS.CN_DEPARTAMENTO
+          )`),
+          'DESCRIPCION_DEPARTAMENTO'
+        ]
+      ],
+      where: {
+        CT_CEDULA
+      }
+    });
+
+    const rolesData = await UsuariosXroles.findAll({
+      attributes: ['CN_ID_ROL'],
+      where: {
+        CT_CEDULA_USUARIO_R: CT_CEDULA
+      }
+    });
+
+    // Combina los datos del usuario con sus roles
+    const user = data[0].toJSON();
+    user.ROLES = rolesData.map(role => role.CN_ID_ROL);
+    
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Error al obtener el usuario" });
+  }
+};
+
+
+//ACTUALIZAR USUARIOSSSSS
+export const updateUser=async(req,res)=>{
+
+  try {
+    const {CT_NOMBRE,
+      CT_APELLIDO_UNO,CT_APELLIDO_DOS,CN_TELEFONO,
+      CT_CORREO,CT_PUESTO,CN_DEPARTAMENTO,CB_ESTADO,CT_CONTRASENA, ROLES}=req.body;
+
+      const {CT_CEDULA_REAL}=req.query
+      
+      const data={CT_NOMBRE,
+      CT_APELLIDO_UNO,CT_APELLIDO_DOS,CN_TELEFONO,
+      CT_CORREO,CT_PUESTO,CN_DEPARTAMENTO,CB_ESTADO,CT_CONTRASENA};
+
+      console.log(data,ROLES,CT_CEDULA_REAL);
+
+      
+      await Usuarios.update(data, {
+        where: { CT_CEDULA: CT_CEDULA_REAL }
+      });
+   
+
+       await UsuariosXroles.destroy({
+        where: {
+          CT_CEDULA_USUARIO_R: CT_CEDULA_REAL
+        }
+      });
+  
+      const rolesArray = ROLES.map(roleId => ({
+        CT_CEDULA_USUARIO_R: CT_CEDULA_REAL,
+        CN_ID_ROL: roleId
+      }));
+  
+      await UsuariosXroles.bulkCreate(rolesArray)
+  
+    return res.status(201).json({msg:'Usuario creado con exito'});    
+  } catch (error) {
+    return res.status(500).json({msg:"Error al crear usuario"})
+  }
+}
