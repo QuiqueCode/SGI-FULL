@@ -1,8 +1,9 @@
 import { IonButton, IonIcon } from '@ionic/react'
 import React from 'react'
 import { AdminSelectorVM } from '../../viewModels/AdminSelectorVM/AdminSelectorVM'
+import NavBar from '../../components/Navbar';
 
-export default function AdminSelectorV() {
+export default function View() {
     const {goBack, goCreateUser,goToRol, goToUserList}=AdminSelectorVM();
   return (
     <>
@@ -36,5 +37,11 @@ export default function AdminSelectorV() {
 
       </div>
     </>
+  )
+}
+
+export const AdminSelectorV=()=>{
+  return(
+    <NavBar key={2} component={<View></View>}></NavBar>
   )
 }

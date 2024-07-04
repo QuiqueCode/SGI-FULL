@@ -10,6 +10,10 @@ export const WorkReportVM=()=>{
     const getInfo=async()=>{
         const workData=await WorkReportService.getWorkReport();
         setData(workData);
+        getValue()
+    }
+    const getValue=()=>{
+        console.log(data)
     }
     const goBack=()=>{
         //Volver al menu

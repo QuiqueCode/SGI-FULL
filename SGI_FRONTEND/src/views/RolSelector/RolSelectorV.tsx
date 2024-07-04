@@ -20,7 +20,7 @@ export const RolSelector = () => {
     setIsLoading,
     goToAdmin
   } = RolSelectorActions();
-
+  localStorage.setItem('previousPath', location.pathname);
   useEffect(() => {
     if (isLoading) {
       const duration = 1000; // Duración total en milisegundos (2 segundos)

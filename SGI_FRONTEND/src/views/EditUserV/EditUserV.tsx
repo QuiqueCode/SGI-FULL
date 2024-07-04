@@ -129,7 +129,7 @@ return (
 
       <div className="bodyContainer5">
         <IonButton className="sendButton" type="submit" >
-          Registrar Usuario
+          Guardar información
         </IonButton>
       </div>
     </form>
@@ -153,7 +153,7 @@ return (
            {rol.CT_DESCRIPCION}
 
          </IonLabel>
-         <IonButton className= {formData.ROLES.includes(rol.CN_ID_ROL) ? 'desactivateUser2' : 'desactivateUser'} onClick={()=>{setRol(rol.CN_ID_ROL)}} > {formData.ROLES.includes(rol.CN_ID_ROL) ? 'Desasignar' : 'Asignar'}</IonButton>
+         <IonButton style={{width:'150px'}} className= {formData.ROLES.includes(rol.CN_ID_ROL) ? 'desactivateUser2' : 'desactivateUser'} onClick={()=>{setRol(rol.CN_ID_ROL)}} > {formData.ROLES.includes(rol.CN_ID_ROL) ? 'Desasignar' : 'Asignar'}</IonButton>
        </IonItem>
      </IonList>
 

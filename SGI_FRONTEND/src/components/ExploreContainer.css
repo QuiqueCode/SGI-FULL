@@ -22,3 +22,25 @@
 #container a {
   text-decoration: none;
 }
+.menuContent {
+  width: 100%; 
+  color: black; 
+  background-color: white; 
+  border-radius: 10px; 
+  margin-bottom: 15px; 
+  display: flex; 
+  flex-direction: row; 
+  align-items: center;
+  padding: 10px; /* Añadir algo de padding para mejorar la apariencia */
+}
+.menuContent2 {
+  width: 100%; 
+  color: white; 
+  background-color: #1A1C27; 
+  border-radius: 10px; 
+  margin-bottom: 15px; 
+  display: flex; 
+  flex-direction: row; 
+  align-items: center;
+  padding: 10px; /* Añadir algo de padding para mejorar la apariencia */
+}

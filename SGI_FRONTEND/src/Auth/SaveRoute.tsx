@@ -3,15 +3,20 @@ import { Route, Redirect, RouteProps, useLocation } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
 import { DecodedToken } from '../models/jwt/jwt.model';
 import { useIonToast } from '@ionic/react';
+import NavBar from '../components/Navbar';
 
-interface ProtectedRouteProps extends RouteProps {
+interface ProtectedRouteWithNavBarProps extends RouteProps {
   roles: number[];
+  component: React.ComponentType<any>;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ roles, ...routeProps }) => {
+const ProtectedRouteWithNavBar: React.FC<ProtectedRouteWithNavBarProps> = ({ component: Component, roles, ...rest }) => {
   const [presentT] = useIonToast();
   const dataUser = localStorage.getItem('UserData') ?? '';
   const location = useLocation();
+
+  // Obtener la ruta anterior guardada
+  const previousPath = localStorage.getItem('previousPath') || '/';
 
   let valueToken: number[] = [];
 
@@ -29,17 +34,24 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ roles, ...routeProps })
       message: 'Acceso denegado!',
       duration: 2000,
       position: "middle",
-      color:"danger"
+      color: "danger"
     });
   };
 
+  React.useEffect(() => {
+    // Guardar la ruta actual en localStorage
+    localStorage.setItem('previousPath', location.pathname);
+  }, [location.pathname]);
+
   if (!hasAccess) {
-    console.log(`Redirecting to /RolSelector from ${location.pathname}`);
+    console.log(`Redirecting to previous path: ${previousPath}`);
     presentToast();
-    return <Redirect to="/RolSelector" />;
+    return <Redirect to={previousPath} />;
   }
 
-  return <Route {...routeProps} />;
+  return (
+<NavBar component={<Component {...rest} />}  roles={valueToken} />
+  );
 };
 
-export default ProtectedRoute;
+export default ProtectedRouteWithNavBar;

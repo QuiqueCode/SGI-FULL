@@ -7,8 +7,7 @@ import { Usuarios } from "../models/Usuarios.js";
 import { Imagenes } from "../models/Imagenes.js";
 import { BitacoraEstados } from "../models/BitcaoraEstado.js";
 import { BitacoraGenral } from "../models/BitacoraGeneral.js";
-
-
+import nodemailer from "nodemailer";
 
 let CT_CODIGO_INCIDENCIA_R;
 //USUARIO
@@ -315,12 +314,21 @@ export const getIncidentData = async (req, res) => {
 
 
 //Asignar
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  auth: {
+    user: "dylancastillocr@gmail.com",
+    pass: "zvza ghks xpbc bukz",
+  },
+});
+
 
 export const technicianAsign= async(req,res)=>{
   try {
   const {CT_CEDULA_USUARIO_R,CT_CODIGO_INCIDENCIA_R}=req.query
   const {AFECTACION,PRIORIDAD,RIESGO}=req.body
-
+/*
   await UsuarioxIncidenciaAsignacion.create({CT_CEDULA_USUARIO_R,CT_CODIGO_INCIDENCIA_R})
   await Incidencia.update(
     { CN_ID_ESTADOF: 2 },
@@ -336,7 +344,10 @@ export const technicianAsign= async(req,res)=>{
     CT_SISTEMA:'SGI',
     CT_REFERENCIA:`Numero de incidencia: ${CT_CODIGO_INCIDENCIA_R} - Código técnico = ${CT_CEDULA_USUARIO_R} - Afectación= ${AFECTACION} - Prioridad= ${PRIORIDAD} - Riesgo= ${RIESGO}`
   }
-  await BitacoraGenral.create(reportData)
+  await BitacoraGenral.create(reportData)*/
+  const correo= await Usuarios.findAll({attributes:['CT_CORREO'],where:{CT_CEDULA:CT_CEDULA_USUARIO_R}})
+  console.log(correo[0].CT_CORREO)
+  main(correo[0].CT_CORREO,CT_CODIGO_INCIDENCIA_R)
   res.status(200).json({ msg: "Asignacion Realizada" });
   } catch (error) {
     console.error("Error al asignar:", error);
@@ -344,7 +355,19 @@ export const technicianAsign= async(req,res)=>{
   }
 
 }
-// Justificacion de cierre
+async function main(email,incidencia) {
+  console.log(email.incidencia)
+  const info = await transporter.sendMail({
+    from: 'dylancastillocr@gmail.com', 
+    to: email,
+    subject: "Hola", 
+    text: `Se te ha asignado una nueva incidencia. Especificamente la incidencia ${incidencia}`// plain text body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+
+}
+
 
 export const jusitfyClousure=async(req,res)=>{
   const {CT_JUSTIFICACION_CIERRE,CT_CODIGO_INCIDENCIA}=req.body;

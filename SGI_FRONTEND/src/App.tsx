@@ -56,45 +56,44 @@ import RegisterUserV from './views/RegisterUserV/RegisterUserV';
 import RolAministrationV from './views/RolAministrationV/RolAministrationV';
 import UserAdminV from './views/UserAdminV/UserAdminV';
 import EditUserV from './views/EditUserV/EditUserV';
-
+import NavBar from './components/Navbar';
+import ProtectedRouteWithNavBar from './Auth/SaveRoute';
 
 setupIonicReact();
 
+
 const App: React.FC = () => (
   <IonApp>
-  
-  <IonReactRouter>
-    <Switch>
-      <Route path="/login" component={Login} exact />
-      <ProtectedRoute path="/RolSelector" component={RolSelector} exact roles={[1, 2, 3, 4, 5]} />
-      <ProtectedRoute path="/UserIncidentL" component={UserIncidentList} exact roles={[2]} />
-      <ProtectedRoute path="/Cincident" component={CIncident} exact roles={[2]} />
-      <ProtectedRoute path="/incidentManagerList" component={IncidentList} exact roles={[3]} />
-      <ProtectedRoute path="/reportSelector" component={ReportSelectorV} exact roles={[3]} />
-      <ProtectedRoute path="/workReport" component={WorkReportV} exact roles={[3]} />
-      <ProtectedRoute path="/managerDetail" component={DetailIncidentManagerV} exact roles={[3]} />
-      <ProtectedRoute path="/techAsignL" component={TechnicianManagerList} exact roles={[3]} />
-      <ProtectedRoute path="/justifyClousure" component={JustifyClousure} exact roles={[3]} />
-      <ProtectedRoute path="/TechIncidentsList" component={TechnicalIncidentList} exact roles={[4]} />
-      <ProtectedRoute path="/TechIncidentDetail" component={IncidentTechnicalV} exact roles={[4]} />
-      <ProtectedRoute path="/diagnostic" component={CDiagnosis} exact roles={[4]} />
-      <ProtectedRoute path="/SupervisorCloseList" component={SupervisorIncidentCloseV} exact roles={[5]} />
-      <ProtectedRoute path="/SupervisorIncidentDetail" component={SupervisorIncidentDetailV} exact roles={[5]} />
-      <ProtectedRoute path="/binnacleReport" component={BinnacleReportV} exact roles={[3]} />
-      <ProtectedRoute path="/workReport2" component={ReportWork2V} exact roles={[3]} />
-      <ProtectedRoute path="/adminView" component={AdminSelectorV} exact roles={[1]} />
-      <ProtectedRoute path="/registerUserV" component={RegisterUserV} exact roles={[1]} />
-      <ProtectedRoute path="/rolAdministration" component={RolAministrationV} exact roles={[1]} />
-      <ProtectedRoute path="/usrAdminV" component={UserAdminV} exact roles={[1]} />
-      <ProtectedRoute path="/editUsr" component={EditUserV} exact roles={[1]} />
+    <IonReactRouter>
+   
+        <Switch>
+          <Route path="/login" component={Login} exact />
+          <Route path="/RolSelector" component={RolSelector} exact />
+          <ProtectedRouteWithNavBar path="/UserIncidentL" component={UserIncidentList} exact roles={[2]} />
+          <ProtectedRouteWithNavBar path="/Cincident" component={CIncident} exact roles={[2]} />
+          <ProtectedRouteWithNavBar path="/incidentManagerList" component={IncidentList} exact roles={[3]} />
+          <ProtectedRouteWithNavBar path="/reportSelector" component={ReportSelectorV} exact roles={[3]} />
+          <ProtectedRouteWithNavBar path="/workReport" component={WorkReportV} exact roles={[3]} />
+          <ProtectedRouteWithNavBar path="/managerDetail" component={DetailIncidentManagerV} exact roles={[3]} />
+          <ProtectedRouteWithNavBar path="/techAsignL" component={TechnicianManagerList} exact roles={[3]} />
+          <ProtectedRouteWithNavBar path="/justifyClousure" component={JustifyClousure} exact roles={[3]} />
+          <ProtectedRouteWithNavBar path="/TechIncidentsList" component={TechnicalIncidentList} exact roles={[4]} />
+          <ProtectedRouteWithNavBar path="/TechIncidentDetail" component={IncidentTechnicalV} exact roles={[4]} />
+          <ProtectedRouteWithNavBar path="/diagnostic" component={CDiagnosis} exact roles={[4]} />
+          <ProtectedRouteWithNavBar path="/SupervisorCloseList" component={SupervisorIncidentCloseV} exact roles={[5]} />
+          <ProtectedRouteWithNavBar path="/SupervisorIncidentDetail" component={SupervisorIncidentDetailV} exact roles={[5]} />
+          <ProtectedRouteWithNavBar path="/binnacleReport" component={BinnacleReportV} exact roles={[3]} />
+          <ProtectedRouteWithNavBar path="/workReport2" component={ReportWork2V} exact roles={[3]} />
+          <ProtectedRouteWithNavBar path="/adminView" component={AdminSelectorV} exact roles={[1]} />
+          <ProtectedRouteWithNavBar path="/registerUserV" component={RegisterUserV} exact roles={[1]} />
+          <ProtectedRouteWithNavBar path="/rolAdministration" component={RolAministrationV} exact roles={[1]} />
+          <ProtectedRouteWithNavBar path="/usrAdminV" component={UserAdminV} exact roles={[1]} />
+          <ProtectedRouteWithNavBar path="/editUsr" component={EditUserV} exact roles={[1]} />
+          <Redirect exact from="/" to="/login" />
+        </Switch>
+    </IonReactRouter>
+  </IonApp>
 
-      <Redirect exact from="/" to="/login" />
-    </Switch>
-  </IonReactRouter>
-
-
- 
-</IonApp>
 
 );
 
