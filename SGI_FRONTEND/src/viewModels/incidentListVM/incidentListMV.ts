@@ -40,17 +40,16 @@ const filteredData = data.filter(incident =>
     
     history.push('/reportSelector')
   }
-  //Recordar que es el id del incidente.
 
 
   const fetchData = async () => {
     try {
       const result = await getIncidentDataList();
       setData(result);
-      setError(null); // Reset error if successful
+      setError(null); 
     } catch (error) {
       console.error("Error al obtener incidencias:", error);
-      setError("Failed to fetch incidents");
+      setError("Error al obtner incidentes");
     } finally {
       setLoading(false);
     }

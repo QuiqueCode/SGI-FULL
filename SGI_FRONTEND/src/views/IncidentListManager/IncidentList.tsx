@@ -16,6 +16,7 @@ import {
   IonText,
   IonThumbnail,
   IonList,
+  IonSpinner,
 } from "@ionic/react";
 import "./IncidentListStyle.css";
 import { IonSearchbar } from "@ionic/react";
@@ -43,19 +44,23 @@ const IncidentList: React.FC = () => {
   } = IncidentListMV();
 
   useEffect(() => {
-    fetchData();
+    const loadData=async()=>{
+     await Promise.all([
+        fetchData()
+      ])
+    }
+    loadData();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
-  if (error) {
-    return <div>{error}</div>;
-  }
 
   return (
-    <IonContent fullscreen>
+    <>
+    {loading?(
+        <IonSpinner name="crescent" color='light' className="loading-spinner2" />
+
+    ):(
+      <IonContent fullscreen>
       <div className="backContainer">
         <p onClick={backToMenu}>ATRÁS</p>
       </div>
@@ -74,17 +79,18 @@ const IncidentList: React.FC = () => {
         <br />
       </div>
 
-      <div className="bodyContainerBar">
-        <IonSearchbar
+      <div     style={{ marginLeft: "16px", marginRight: "16px" }}>
+     <IonSearchbar
           value={searchTerm}
           onIonChange={handleSearchChange}
           className="custom-searchbar"
-          placeholder="2024-00001"
+          placeholder="702880922"
+      
         ></IonSearchbar>{" "}
-        <br />
-      </div>
-      {filteredData.map((incident) => (
-        <IonList inset={true}>
+
+     </div> <br />
+      {filteredData.map((incident,index) => (
+        <IonList inset={true} key={index}>
           <IonItem detail={false}>
             <IonLabel>
               {"Incidencia: " + incident.CT_CODIGO_INCIDENCIA}
@@ -106,6 +112,9 @@ const IncidentList: React.FC = () => {
         </IonList>
       ))}
     </IonContent>
+    )}
+    </>
+    
   );
 };
 

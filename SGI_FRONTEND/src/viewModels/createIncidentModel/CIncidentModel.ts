@@ -120,11 +120,11 @@ const [present, dismiss] = useIonLoading();
                 CT_DESCRIPCION_INCIDENCIA: '',
                 CT_LUGAR_DE_INCIDENCIA: '',
               }));
-            }, 1000); // Asegura que esto ocurra después de la duración de la alerta
+            }, 1000);
           });
         } catch (error) {
           console.error("Error creando la incidencia:", error);
-          // Manejo de errores
+       
         }
       }else{
         presentToast2();

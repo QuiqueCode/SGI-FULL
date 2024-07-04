@@ -95,7 +95,7 @@ export default function RegisterUserV() {
               className="customSelec"
             >
                 {department.map((data,index)=>(
- <IonSelectOption value={data.CN_CODIGO_DEPARTAMENTO}>{data.CT_NOMBRE_DEPARTAMENTO}</IonSelectOption>
+ <IonSelectOption value={data.CN_CODIGO_DEPARTAMENTO} key={index}>{data.CT_NOMBRE_DEPARTAMENTO}</IonSelectOption>
                 ))}
              
             </IonSelect>

@@ -29,8 +29,8 @@ export const IncidentTechnicalVM = () => {
   const [imagesData,setImagesData]=useState<InitialImagesModel[]>([]);
   const [imagesData2,setImagesData2]=useState<FinalImagesModel[]>([]);
   const history = useHistory();
-  const [present, dismiss] = useIonLoading();
-
+  const [present, dismiss] = useIonLoading(); 
+  const [charge,setCharge]=useState(false)
   const userData= localStorage.getItem('UserData') ?? '';
   const decodedToken = jwtDecode<DecodedToken>(userData);
   let valueToken = decodedToken.idUsuario;
@@ -163,7 +163,7 @@ export const IncidentTechnicalVM = () => {
     try {
       const result = await getIncidentTechnicianDataList();
       setData(result);
-      setError(null); // Reset error if successful
+      setError(null); 
     } catch (error) {
       console.error("Error al obtener incidencias:", error);
       setError("Failed to fetch incidents");
@@ -177,6 +177,7 @@ export const IncidentTechnicalVM = () => {
     const images2= await InitialImagesService.fetchImages(1);
     setImagesData(images);
     setImagesData2(images2);
+    setCharge(!charge)
   }
 
   //Handles
@@ -197,6 +198,7 @@ export const IncidentTechnicalVM = () => {
       position: "top",
       color:"success"
     });
+    chargeImages();
   };
 
   const saveImages=()=>{
@@ -209,7 +211,7 @@ export const IncidentTechnicalVM = () => {
               chargeImages();
               presentToast();
               setImages([]);
-            }, 1000); // Asegura que esto ocurra después de la duración de la alerta
+            }, 1000); 
           });
   }
 
@@ -244,7 +246,8 @@ export const IncidentTechnicalVM = () => {
     valueToken,
     handleSearchChange,
     filteredData,
-    searchTerm
+    searchTerm,
+    charge
   };
 };
 

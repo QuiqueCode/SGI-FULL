@@ -22,7 +22,7 @@ export const RegisterUserVM = () => {
     CT_CORREO: "",
     CT_PUESTO: "",
     CN_DEPARTAMENTO: 0,
-    CB_ESTADO: true, // Asumimos que el usuario está activo por defecto
+    CB_ESTADO: true, 
     CT_CONTRASENA: "",
     ROLES: [],
   });
@@ -96,15 +96,15 @@ export const RegisterUserVM = () => {
             CT_CORREO: "",
             CT_PUESTO: "",
             CN_DEPARTAMENTO: 0,
-            CB_ESTADO: true, // Asumimos que el usuario está activo por defecto
+            CB_ESTADO: true, 
             CT_CONTRASENA: "",
             ROLES: [],
           }));
-        }, 1000); // Asegura que esto ocurra después de la duración de la alerta
+        }, 1000); 
       });
     } catch (error) {
       console.error("Error creando la incidencia:", error);
-      // Manejo de errores
+  
     }
 }
 

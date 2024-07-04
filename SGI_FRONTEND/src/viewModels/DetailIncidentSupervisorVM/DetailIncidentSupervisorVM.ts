@@ -95,6 +95,7 @@ export const DetailIncidentSupervisorVM=()=>{
       const chargeImages=async()=>{
         const images= await InitialImagesService.fetchImages(0);
         const images2= await InitialImagesService.fetchImages(1);
+        console.log(imagesData)
         setImagesData(images);
         setImagesData2(images2)
       }

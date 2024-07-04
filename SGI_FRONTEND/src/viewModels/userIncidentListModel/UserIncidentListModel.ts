@@ -16,8 +16,7 @@ export const UserIncidentListVM = () => {
   const goTocreate = () => {
     history.push("/Cincident");
   };
-  //Recordar que es el id del incidente.
-
+  
   const [searchTerm, setSearchTerm] = useState('');
 
   // Función para manejar cambios en el IonSearchbar

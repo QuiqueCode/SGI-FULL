@@ -105,10 +105,10 @@ export const SuperVisorDetailVM = () => {
       try {
         const result = await getIncidentTechnicianDataList();
         setData(result);
-        setError(null); // Reset error if successful
+        setError(null); 
       } catch (error) {
         console.error("Error al obtener incidencias:", error);
-        setError("Failed to fetch incidents");
+        setError("Error al obtener la incidencia");
       } finally {
         setLoading(false);
       }
@@ -183,7 +183,7 @@ export const SuperVisorDetailVM = () => {
               ...prevState,
               CD_COSTO: 0,
             }));
-            }, 1000); // Asegura que esto ocurra después de la duración de la alerta
+            }, 1000); 
           });
         } catch (error) {
           console.log(error)

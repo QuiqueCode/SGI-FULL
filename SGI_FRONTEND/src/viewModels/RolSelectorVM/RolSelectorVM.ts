@@ -48,7 +48,7 @@ export const RolSelectorActions=()=>{
   
     const handleAction = () => {
       console.log('Acción ejecutada!');
-      // Aquí puedes poner la acción que quieres ejecutar al finalizar la carga
+    
     };
   
     return{

@@ -82,7 +82,7 @@ const changeValue=()=>{
             CT_TECNICO: valueToken,
             CB_REQUIERE_COMPRA: false,
           }));
-        }, 1000); // Asegura que esto ocurra después de la duración de la alerta
+        }, 1000); 
       });
     } catch (error) {
       console.error("Error creando incidencia:", error);

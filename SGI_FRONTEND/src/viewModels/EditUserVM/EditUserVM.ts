@@ -29,11 +29,11 @@ const decodedToken = jwtDecode<DecodedToken>(data);
       CT_NOMBRE: "",
       CT_APELLIDO_UNO: "",
       CT_APELLIDO_DOS: "",
-      CN_TELEFONO: "",
+      CN_TELEFONO: 0,
       CT_CORREO: "",
       CT_PUESTO: "",
       CN_DEPARTAMENTO: 0,
-      CB_ESTADO: true, // Asumimos que el usuario está activo por defecto
+      CB_ESTADO: true, 
       CT_CONTRASENA: "",
       ROLES: [],
     });
@@ -48,17 +48,17 @@ const decodedToken = jwtDecode<DecodedToken>(data);
         CT_NOMBRE: data.CT_NOMBRE,
         CT_APELLIDO_UNO: data.CT_APELLIDO_UNO,
         CT_APELLIDO_DOS: data.CT_APELLIDO_DOS,
-        CN_TELEFONO: data.CT_APELLIDO_DOS,
+        CN_TELEFONO: data.CN_TELEFONO,
         CT_CORREO: data.CT_CORREO,
         CT_PUESTO: data.CT_PUESTO,
         CN_DEPARTAMENTO: data.CN_DEPARTAMENTO,
-        CB_ESTADO: data.CB_ESTADO, // Asumimos que el usuario está activo por defecto
+        CB_ESTADO: data.CB_ESTADO, 
         CT_CONTRASENA: data.CT_CONTRASENA,
         ROLES: data.ROLES,
       }));
  
       setDataUser(data);
-      console.log(dataUser)
+      console.log(data)
     }
     
     const changeState = () => {
@@ -75,6 +75,7 @@ const decodedToken = jwtDecode<DecodedToken>(data);
     };
     const getDepartament = async () => {
       const data = await GetDepartament.fetchDepartment();
+      console.log(data)
       setDepartment(data);
     };
     const getRoles=async()=>{
@@ -129,11 +130,11 @@ const decodedToken = jwtDecode<DecodedToken>(data);
         }).then(() => {
           setTimeout(() => {
             presentToast();
-          }, 1000); // Asegura que esto ocurra después de la duración de la alerta
+          }, 1000); 
         });
       } catch (error) {
-        console.error("Error creando la incidencia:", error);
-        // Manejo de errores
+        console.error("Error editando usuario:", error);
+      
       }
   }
   

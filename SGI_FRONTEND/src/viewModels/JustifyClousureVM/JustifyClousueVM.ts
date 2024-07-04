@@ -18,7 +18,7 @@ export function JustifyClousureVM(){
 
   const presentToast = () => {
     presentT({
-      message: 'Justificación Almacenado!',
+      message: 'Justificación Almacenada!',
       duration: 2000,
       position: "middle",
       color:"success"
@@ -53,7 +53,7 @@ export function JustifyClousureVM(){
             CT_JUSTIFICACION_CIERRE:'',
             CT_CODIGO_INCIDENCIA: localStorage.getItem("idIncident") || "",
           }));
-        }, 1000); // Asegura que esto ocurra después de la duración de la alerta
+        }, 1000); 
       });
     } catch (error) {
       console.error("Error al almacenar justificacion:", error);

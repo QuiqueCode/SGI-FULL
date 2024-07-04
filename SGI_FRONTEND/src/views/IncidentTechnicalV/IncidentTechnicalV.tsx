@@ -18,6 +18,7 @@ import {
   IonNote,
   IonSelect,
   IonSelectOption,
+  IonSpinner,
 } from "@ionic/react";
 import {
   IonCard,
@@ -29,7 +30,7 @@ import {
 import "./IncidentTechnicalStyle.css";
 import { IonContent, IonIcon } from "@ionic/react";
 import { IncidentTechnicalVM } from "../../viewModels/incidentTechnicalVM/IncidentTechnicalVM";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const IncidentTechnicalV = () => {
   const {
@@ -51,18 +52,32 @@ export const IncidentTechnicalV = () => {
     openCamera,
     images,
     saveImages,
-    valueToken
+    valueToken, 
+    charge
   } = IncidentTechnicalVM();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setDetails();
-    sendDiagnosis();
-    chargeImages();
-    getStatues();
+    const loadData = async () => {
+      await Promise.all([
+        setDetails(),
+        sendDiagnosis(),
+        chargeImages(),
+        getStatues()
+      ]);
+      setLoading(false);
+    };
+
+    loadData();
   }, []);
+  //charge
   return (
     <>
-      <IonContent fullscreen>
+    {loading?(
+        <IonSpinner name="crescent" color='light' className="loading-spinner2" />
+
+    ):(
+        <IonContent fullscreen>
         <div className="backContainer">
           <p onClick={moveToList}>ATRÁS</p>
         </div>
@@ -86,14 +101,6 @@ export const IncidentTechnicalV = () => {
                 formatDateTime(detail?.CF_FECHA_HORA_REGISTRO || "")}
             </span>
           </div>
-          {/**
-             <div className="icon-text">
-            <IonIcon icon={person} className="icon" />
-            <span>Solicitante: </span>
-          </div> 
-           
-           */}
-
           <div className="icon-text">
             <IonIcon icon={play} className="icon" />
             <span style={{ marginRight: "15px" }}>Estado:</span>
@@ -243,6 +250,8 @@ export const IncidentTechnicalV = () => {
           Agregar Diagnostico
         </IonButton>
       </IonContent>
+    )}
+    
     </>
   );
 };

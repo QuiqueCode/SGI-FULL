@@ -15,7 +15,7 @@ export interface CreateUserModel {
     CT_NOMBRE: string;
     CT_APELLIDO_UNO: string;
     CT_APELLIDO_DOS: string;
-    CN_TELEFONO: string;
+    CN_TELEFONO: number;
     CT_CORREO: string;
     CT_PUESTO:string
     CN_DEPARTAMENTO: number;

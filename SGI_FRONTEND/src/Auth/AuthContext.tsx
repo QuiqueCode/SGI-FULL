@@ -26,7 +26,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const decodedToken = jwtDecode<User>(token);
       setUser(decodedToken);
       localStorage.setItem('token', token);
-      console.log(decodedToken);  // Para verificar que el token se decodifica correctamente
     } catch (error) {
       console.error('Error decoding token:', error);
     }
