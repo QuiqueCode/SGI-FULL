@@ -25,6 +25,8 @@ El acceso a las diferentes funcionalidades del programa depende del rol del usua
 ![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2Fany_text-Node.js-blue?style=for-the-badge&logo=nodedotjs&logoColor=white&label=%20&labelColor=black&color=%23339933&cacheSeconds=3600)![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2Fany_text-Express-blue?style=for-the-badge&logo=express&label=%20&labelColor=black&color=%23000000)
 
 ## Imágenes del proyecto
+La siguientes imagenes son algunas de las partes del sistema, algunas otras secciones no se ven directamente en estas imagenes ya que serian muchas imágenes.
+
 <img src="https://github.com/QuiqueCode/SGI-FULL/assets/149546547/4a9d16a6-a7c9-48b8-b736-679f8949df70" alt="Imagen de WhatsApp 2024-07-05 a las 10 39 22_3545e534" width="300">
 <img src="https://github.com/QuiqueCode/SGI-FULL/assets/149546547/fd45b0f8-7058-40a2-9602-0301cfe5686c" alt="Imagen de WhatsApp 2024-07-05 a las 10 39 22_972e81ee" width="300">
 <img src="https://github.com/QuiqueCode/SGI-FULL/assets/149546547/b58e983e-4c18-49cc-abfc-76baf4893d95" alt="Imagen de WhatsApp 2024-07-05 a las 10 39 23_9d0f77bb" width="300">
